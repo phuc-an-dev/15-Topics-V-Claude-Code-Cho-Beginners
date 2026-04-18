@@ -4,7 +4,7 @@
 
 ---
 
-## 🧠 Hiểu Về Token Limit Trước
+## Hiểu Về Token Limit Trước
 
 ### Hai layers limit (quan trọng!)
 1. **Context window** (per-conversation): 200K tokens (Pro/Max), 500K (Enterprise một số models)
@@ -24,9 +24,9 @@
 
 ---
 
-## 🎯 15 Chiến Thuật Tiết Kiệm Tokens (theo priority)
+## 15 Chiến Thuật Tiết Kiệm Tokens (theo priority)
 
-### ⭐ Priority 1: Session Management
+### Priority 1: Session Management
 
 #### 1. **`/clear` khi chuyển topic**
 - **Cú click đơn quan trọng nhất** - single most effective lever
@@ -50,7 +50,7 @@
 
 ---
 
-### ⭐ Priority 2: Reduce System Overhead
+### Priority 2: Reduce System Overhead
 
 #### 6. **Enable Tool Search (lazy-load MCP tools)**
 ```json
@@ -65,14 +65,14 @@
 - Patch có thể cut xuống ~9K (tiết kiệm 50% overhead)
 - **Trade-off**: Ít "safety rails" hơn, nhưng context rộng hơn
 - Repo: `ykdojo/claude-code-tips` Tip 15 có patch scripts
-- ⚠️ Phải `DISABLE_AUTOUPDATER=1` nếu không update sẽ phá patches
+- ️ Phải `DISABLE_AUTOUPDATER=1` nếu không update sẽ phá patches
 
 #### 8. **`--system-prompt-file` flag (alternative chính thức)**
 Thay thế system prompt bằng custom file ngắn gọn hơn.
 
 ---
 
-### ⭐ Priority 3: CLAUDE.md Discipline
+### Priority 3: CLAUDE.md Discipline
 
 #### 9. **Keep CLAUDE.md siêu ngắn**
 > "The CLAUDE.md file is read at the **start of every session**, so every word costs tokens **every time**." — MindStudio
@@ -88,21 +88,21 @@ Thay thế system prompt bằng custom file ngắn gọn hơn.
 
 ---
 
-### ⭐ Priority 4: Smart File Handling
+### Priority 4: Smart File Handling
 
 #### 11. **Dùng `.claudeignore` như `.gitignore`**
 - Chặn Claude đọc: `node_modules`, `dist/`, `build/`, `*.lock`, `*.log`, datasets lớn
 - Đặt ở project root và mỗi package (monorepo)
 
 #### 12. **Prompt precision - reference bare path, không `@`**
-| ❌ Wastes tokens | ✅ Efficient |
+| Wastes tokens | Efficient |
 |------------------|--------------|
 | `@auth.ts fix the token bug` (inject toàn bộ file + CLAUDE.md tree) | "look at `validateToken` function in `src/auth.ts`" (Claude mở selective) |
 | Paste cả stack trace 200 lines | Trim về 20-30 lines relevant |
 | Paste data dump | Lưu file trên disk, reference path |
 
 #### 13. **Specific prompts beat broad scanning**
-| ❌ Broad (tốn context) | ✅ Narrow (tiết kiệm) |
+| Broad (tốn context) | Narrow (tiết kiệm) |
 |-----------------------|----------------------|
 | "improve this codebase" | "add input validation to login function in `auth.ts`" |
 | "fix the bugs" | "fix the null check bug in `useUser.ts` line 42" |
@@ -110,7 +110,7 @@ Thay thế system prompt bằng custom file ngắn gọn hơn.
 
 ---
 
-### ⭐ Priority 5: Use Subagents
+### Priority 5: Use Subagents
 
 #### 14. **Subagents = Separate Context Windows**
 > "Since context is your fundamental constraint, subagents are **one of the most powerful tools available**." — Anthropic
@@ -129,7 +129,7 @@ Use a subagent to review this code for edge cases.
 
 ---
 
-### ⭐ Priority 6: Task Structuring
+### Priority 6: Task Structuring
 
 #### 15. **Break Down Large Tasks**
 - Nếu regularly hit compaction → answer không phải bigger context → **smaller tasks**
@@ -137,7 +137,7 @@ Use a subagent to review this code for edge cases.
 
 ---
 
-## 💡 Pro Patterns
+## Pro Patterns
 
 ### Pattern 1: **HANDOFF.md Technique**
 Khi sắp đầy context, ask Claude write `HANDOFF.md`:
@@ -176,7 +176,7 @@ Benefits:
 
 ---
 
-## 🚨 Token Drain Culprits (tránh!)
+## Token Drain Culprits (tránh!)
 
 ### 1. **Kitchen Sink Sessions**
 Multiple unrelated tasks → context đầy rác → performance drop.
@@ -200,7 +200,7 @@ Claude write code wrong → bạn correct 5 lần → context đầy failed atte
 
 ---
 
-## 📊 Monitoring Token Usage
+## Monitoring Token Usage
 
 ### Tools để track
 | Tool | Mục đích |
@@ -213,13 +213,13 @@ Claude write code wrong → bạn correct 5 lần → context đầy failed atte
 
 ### Status line template (ykdojo)
 ```
-Opus 4.5 | 📁my-project | 🔀main | ██░░░░░░░░ 18% of 200k tokens
+Opus 4.5 | my-project | main | 18% of 200k tokens
 ```
 → Biết ngay khi đến 80% → plan `/clear` hoặc HANDOFF.
 
 ---
 
-## 🎯 Action Checklist cho Beginners
+## Action Checklist cho Beginners
 
 ### Setup một lần (tiết kiệm tokens mọi session)
 - [ ] Enable `ENABLE_TOOL_SEARCH: "true"` trong settings
@@ -247,7 +247,7 @@ Opus 4.5 | 📁my-project | 🔀main | ██░░░░░░░░ 18% of 200
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic Official: https://code.claude.com/docs/en/costs
 - Support article: https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code
 - Context windows docs: https://platform.claude.com/docs/en/build-with-claude/context-windows

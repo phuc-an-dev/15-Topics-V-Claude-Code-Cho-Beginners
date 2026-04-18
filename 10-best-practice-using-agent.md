@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Subagent Là Gì?
+## Subagent Là Gì?
 
 **Subagent** = Specialized AI assistant trong Claude Code, có:
 - **Context window riêng** (isolated)
@@ -27,33 +27,33 @@
 
 ---
 
-## 📍 Khi NÀO Nên Dùng Subagent?
+## Khi NÀO Nên Dùng Subagent?
 
-### ✅ Dùng subagent khi:
+### Dùng subagent khi:
 
 1. **Investigation/Research**
-   - Đọc hàng chục files
-   - Understand pattern trước khi code
-   - Security review, performance audit
+  - Đọc hàng chục files
+  - Understand pattern trước khi code
+  - Security review, performance audit
 
 2. **Parallel Independent Tasks**
-   - Update cùng pattern trong nhiều files
-   - Fix errors across several files
-   - Chạy multiple audits cùng lúc
+  - Update cùng pattern trong nhiều files
+  - Fix errors across several files
+  - Chạy multiple audits cùng lúc
 
 3. **Fresh Perspective cho Review**
-   - Code review (không bias bởi implementation đã viết)
-   - Test review
-   - Security audit
+  - Code review (không bias bởi implementation đã viết)
+  - Test review
+  - Security audit
 
 4. **Repeated Workflows**
-   - Cùng loại task lặp đi lặp lại → define custom subagent
+  - Cùng loại task lặp đi lặp lại → define custom subagent
 
 5. **Cost Optimization**
-   - Route simple tasks → cheaper models (Haiku/Sonnet)
-   - Main session on Opus, subagents on Sonnet
+  - Route simple tasks → cheaper models (Haiku/Sonnet)
+  - Main session on Opus, subagents on Sonnet
 
-### ❌ KHÔNG dùng subagent khi:
+### KHÔNG dùng subagent khi:
 
 - Task đơn giản, 1-2 files
 - Sequential task phụ thuộc nhiều vào context main conversation
@@ -61,7 +61,7 @@
 
 ---
 
-## 🏗️ Built-in Subagents
+## ️ Built-in Subagents
 
 Claude Code có sẵn:
 - **Explore**: Fast, read-only code search
@@ -70,7 +70,7 @@ Claude Code có sẵn:
 
 ---
 
-## 🛠️ Cách Tạo Custom Subagent
+## ️ Cách Tạo Custom Subagent
 
 ### Method 1: Interactive (dễ nhất)
 ```bash
@@ -119,25 +119,25 @@ Thêm **"PROACTIVELY"** hoặc **"MUST BE USED"** trong description:
 
 ---
 
-## 🎨 Common Subagent Patterns
+## Common Subagent Patterns
 
-### Pattern 1: Explore-Plan-Execute Pipeline ⭐
+### Pattern 1: Explore-Plan-Execute Pipeline 
 
 **3-phase pattern** (Sathish Raju) cho complex engineering tasks:
 
 ```
 1. Explore Agent (read-only)
-   → Scan codebase, understand architecture
-   → Output: explored-findings.md
+  → Scan codebase, understand architecture
+  → Output: explored-findings.md
 
 2. Plan Agent (analytical)
-   → Design approach based on findings
-   → Output: implementation-plan.md
-   ← HUMAN REVIEW GATE ←
+  → Design approach based on findings
+  → Output: implementation-plan.md
+  ← HUMAN REVIEW GATE ←
 
 3. Execute Agent (write access)
-   → Implement theo plan
-   → Output: code + tests
+  → Implement theo plan
+  → Output: code + tests
 ```
 
 **Key insight**: Human review gate giữa Plan và Execute, KHÔNG giữa Explore và Plan.
@@ -148,10 +148,10 @@ Thêm **"PROACTIVELY"** hoặc **"MUST BE USED"** trong description:
 ### Pattern 2: Hub-and-Spoke (Orchestrator-Workers)
 
 ```
-          Main Agent (Orchestrator)
-         /    |    |    \
-     Agent  Agent Agent  Agent
-     (A)    (B)   (C)    (D)
+     Main Agent (Orchestrator)
+     /  |  |  \
+   Agent Agent Agent Agent
+   (A)  (B)  (C)  (D)
 ```
 
 Main agent delegates tasks to specialized workers, synthesizes results.
@@ -173,9 +173,9 @@ Task → Split → Agent1, Agent2, Agent3 (parallel) → Merge
 
 ```
 Agent A (Writer): Implement feature
-      ↓
+   ↓
 Agent B (Reviewer): Fresh session, review code critically
-      ↓
+   ↓
 Agent A: Address review feedback
 ```
 
@@ -184,14 +184,14 @@ Agent A: Address review feedback
 ### Pattern 5: Test-First Pipeline (Multi-agent TDD)
 
 ```
-🔴 tdd-test-writer → 🟢 tdd-implementer → 🔵 tdd-refactorer
+ tdd-test-writer → tdd-implementer → tdd-refactorer
 ```
 
 Mỗi agent có context riêng, không bleed implementation vào tests.
 
 ---
 
-## 🌟 Example Custom Subagents
+## Example Custom Subagents
 
 ### Subagent 1: `code-reviewer`
 ```markdown
@@ -263,7 +263,7 @@ Write clear, concise documentation:
 
 ---
 
-## 🔧 Agent Usage Rules trong CLAUDE.md
+## Agent Usage Rules trong CLAUDE.md
 
 Từ GitHub gist (tomas-rampas):
 
@@ -293,7 +293,7 @@ For ANY task touching >3 files OR involving refactoring:
 
 ---
 
-## 💰 Cost Optimization
+## Cost Optimization
 
 ### Use `CLAUDE_CODE_SUBAGENT_MODEL` env var
 ```bash
@@ -312,7 +312,7 @@ export CLAUDE_CODE_SUBAGENT_MODEL="claude-sonnet-4-5-20250929"
 
 ---
 
-## 🚀 Subagents vs Agent Teams
+## Subagents vs Agent Teams
 
 ### Subagents (single session)
 - Hierarchical: Orchestrator → Workers
@@ -329,7 +329,7 @@ export CLAUDE_CODE_SUBAGENT_MODEL="claude-sonnet-4-5-20250929"
 
 ---
 
-## 🔒 Safety with Subagents
+## Safety with Subagents
 
 ### Anthropic's 3 safeguards
 1. **Minimum necessary permissions** - tools field limits access
@@ -346,43 +346,43 @@ Restrict tools for automation workflows.
 - **plan mode** (`--permission-mode plan`): Read-only, safe exploration
 - **default mode**: Ask before destructive
 - **auto mode**: Classifier-based approval
-- **bypassPermissions**: ⚠️ Only trong containers
+- **bypassPermissions**: ️ Only trong containers
 
 ---
 
-## 🚫 Common Anti-Patterns
+## Common Anti-Patterns
 
 ### 1. **Over-parallelizing**
-❌ Launch 10 parallel agents cho simple feature
-✅ Group related micro-tasks. Parallel chỉ khi domains independent.
+ Launch 10 parallel agents cho simple feature
+ Group related micro-tasks. Parallel chỉ khi domains independent.
 
 ### 2. **Under-parallelizing**
-❌ Run 4 independent analyses sequentially
-✅ Spot domain independence, parallelize.
+ Run 4 independent analyses sequentially
+ Spot domain independence, parallelize.
 
 ### 3. **Vague Invocations**
-❌ "Use a subagent to implement the feature"
-✅ Specific scope, file references, success criteria
+ "Use a subagent to implement the feature"
+ Specific scope, file references, success criteria
 
 ### 4. **Orchestrator Context Full**
 Khi orchestrator collect too many subagent results → context đầy → degrades.
-✅ Subagents phải return **concise summaries**, not raw output.
+ Subagents phải return **concise summaries**, not raw output.
 
 ### 5. **No Tool Restrictions**
 Default: subagent có access mọi tools parent có.
-✅ Explicitly limit với `tools:` field trong frontmatter.
+ Explicitly limit với `tools:` field trong frontmatter.
 
 ### 6. **Subagent for Simple Tasks**
-❌ Fix typo → spawn subagent
-✅ Do inline. Subagents add overhead.
+ Fix typo → spawn subagent
+ Do inline. Subagents add overhead.
 
 ### 7. **Forget Structured Output**
 Parallel subagents cần output schema consistent để merge.
-✅ Define output format in system prompt.
+ Define output format in system prompt.
 
 ---
 
-## 📋 Invocation Checklist
+## Invocation Checklist
 
 Mỗi lần dispatch subagent, ensure có đủ:
 
@@ -405,7 +405,7 @@ Constraints: [what not to do]
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic Official: https://code.claude.com/docs/en/sub-agents
 - Anthropic Blog: https://claude.com/blog/subagents-in-claude-code
 - Anthropic Course: https://anthropic.skilljar.com/introduction-to-subagents

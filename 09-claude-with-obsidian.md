@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Tổng Quan
+## Tổng Quan
 
 Obsidian = markdown vault local → Claude có thể access theo **3 cách chính**.
 
@@ -18,7 +18,7 @@ Obsidian = markdown vault local → Claude có thể access theo **3 cách chín
 
 ---
 
-## 🥇 Option 1: Filesystem MCP (Đơn giản nhất)
+## Option 1: Filesystem MCP (Đơn giản nhất)
 
 ### Concept
 Obsidian vault = folder markdown files → Claude Filesystem MCP access trực tiếp, không cần Obsidian running.
@@ -27,20 +27,20 @@ Obsidian vault = folder markdown files → Claude Filesystem MCP access trực t
 ```bash
 # Install Filesystem MCP
 claude mcp add filesystem \
-  -s user \
-  npx @modelcontextprotocol/server-filesystem \
-  /path/to/your/vault
+ -s user \
+ npx @modelcontextprotocol/server-filesystem \
+ /path/to/your/vault
 ```
 
 ### Pros
-- ✅ Zero Obsidian plugins needed
-- ✅ Works offline
-- ✅ Claude có thể work khi Obsidian closed
+- Zero Obsidian plugins needed
+- Works offline
+- Claude có thể work khi Obsidian closed
 
 ### Cons
-- ❌ Không search bằng Obsidian's indexing
-- ❌ Không hiểu [[wiki links]] natively (chỉ text)
-- ❌ Không trigger Obsidian plugins/workflows
+- Không search bằng Obsidian's indexing
+- Không hiểu [[wiki links]] natively (chỉ text)
+- Không trigger Obsidian plugins/workflows
 
 ### Best for
 - Dev notes, code docs trong vault
@@ -48,16 +48,16 @@ claude mcp add filesystem \
 
 ---
 
-## 🥈 Option 2: Local REST API + mcp-obsidian (Recommended Full Integration)
+## Option 2: Local REST API + mcp-obsidian (Recommended Full Integration)
 
 ### Architecture
 ```
 Claude Desktop/Code
-      ↓ MCP Protocol
-   mcp-obsidian (Python server)
-      ↓ HTTP REST API
+   ↓ MCP Protocol
+  mcp-obsidian (Python server)
+   ↓ HTTP REST API
 Obsidian (phải đang chạy)
-   └── Local REST API plugin
+  Local REST API plugin
 ```
 
 ### Setup Steps
@@ -73,13 +73,13 @@ Obsidian (phải đang chạy)
 ```bash
 # Option A: qua uvx (recommended)
 claude mcp add-json obsidian '{
-  "command": "uvx",
-  "args": ["mcp-obsidian"],
-  "env": {
-    "OBSIDIAN_API_KEY": "your_api_key_here",
-    "OBSIDIAN_HOST": "127.0.0.1",
-    "OBSIDIAN_PORT": "27124"
-  }
+ "command": "uvx",
+ "args": ["mcp-obsidian"],
+ "env": {
+  "OBSIDIAN_API_KEY": "your_api_key_here",
+  "OBSIDIAN_HOST": "127.0.0.1",
+  "OBSIDIAN_PORT": "27124"
+ }
 }' --scope user
 ```
 
@@ -105,7 +105,7 @@ claude mcp add-json obsidian '{
 
 ---
 
-## 🥉 Option 3: obsidian-claude-code-mcp Plugin
+## Option 3: obsidian-claude-code-mcp Plugin
 
 ### Concept
 **Repo**: https://github.com/iansinnott/obsidian-claude-code-mcp
@@ -125,19 +125,19 @@ Mỗi vault cần port riêng. Plugin detect conflicts và guide config.
 Claude Desktop không support HTTP transport trực tiếp. Dùng `mcp-remote` bridge:
 ```json
 {
-  "mcpServers": {
-    "obsidian": {
-      "command": "npx",
-      "args": ["mcp-remote", "http://localhost:22360/sse"],
-      "env": {}
-    }
+ "mcpServers": {
+  "obsidian": {
+   "command": "npx",
+   "args": ["mcp-remote", "http://localhost:22360/sse"],
+   "env": {}
   }
+ }
 }
 ```
 
 ---
 
-## 🚀 Advanced: AgriciDaniel/claude-obsidian (Karpathy's LLM Wiki Pattern)
+## Advanced: AgriciDaniel/claude-obsidian (Karpathy's LLM Wiki Pattern)
 
 **Repo**: https://github.com/AgriciDaniel/claude-obsidian
 
@@ -160,7 +160,7 @@ Claude Desktop không support HTTP transport trực tiếp. Dùng `mcp-remote` b
 
 ---
 
-## 💡 Best Practice Workflows
+## Best Practice Workflows
 
 ### Workflow 1: Claude as Note Organizer
 **Initial prompt** (tạo Project trong Claude Desktop):
@@ -218,7 +218,7 @@ When finishing significant work:
 
 ---
 
-## 🎨 Useful Prompts Cho Obsidian Users
+## Useful Prompts Cho Obsidian Users
 
 ### "Ask my vault"
 ```
@@ -252,9 +252,9 @@ Update those notes với appropriate [[ProjectX-notes]] references.
 
 ---
 
-## 🔒 Security Considerations
+## Security Considerations
 
-### ⚠️ Quan trọng
+### ️ Quan trọng
 1. **API key sensitive** - don't share publicly
 2. **Use separate test vault** đầu tiên trước khi connect main vault
 3. **Regularly audit** files Claude created/modified
@@ -264,32 +264,32 @@ Update those notes với appropriate [[ProjectX-notes]] references.
 ### File Access Control
 ```json
 {
-  "permissions": {
-    "deny": [
-      "Read(/path/to/vault/.obsidian/workspace.json)",
-      "Read(/path/to/vault/Private/**)"
-    ]
-  }
+ "permissions": {
+  "deny": [
+   "Read(/path/to/vault/.obsidian/workspace.json)",
+   "Read(/path/to/vault/Private/**)"
+  ]
+ }
 }
 ```
 Chặn Claude access private folders.
 
 ---
 
-## 🚨 Common Issues & Solutions
+## Common Issues & Solutions
 
 ### Issue 1: "uv/uvx location not found"
 **Fix**: Run `which uvx` và paste full path trong config:
 ```json
 {
-  "command": "/Users/you/.local/bin/uvx"
+ "command": "/Users/you/.local/bin/uvx"
 }
 ```
 
 ### Issue 2: "Unrecognised subcommand"
 **Fix**: Argument order sai. Pattern đúng:
 ```
-uv run mcp-obsidian  (not uv mcp-obsidian run)
+uv run mcp-obsidian (not uv mcp-obsidian run)
 ```
 
 ### Issue 3: Claude không detect MCP tools
@@ -307,12 +307,12 @@ Newer "Streamable HTTP" (2025-03-26) chưa support bởi most MCP clients.
 
 ---
 
-## 🎯 Path Best Practices
+## Path Best Practices
 
 ### Dùng relative paths từ vault root
 ```
-❌ /Users/you/Documents/Obsidian/Vault/Work/note.md
-✅ Work/Projects/ProjectA/notes.md
+ /Users/you/Documents/Obsidian/Vault/Work/note.md
+ Work/Projects/ProjectA/notes.md
 ```
 
 ### Instruct Claude specifically
@@ -323,7 +323,7 @@ Create note at path: Research/AI/claude-workflows.md
 
 ---
 
-## 📚 Sources & Repos
+## Sources & Repos
 
 | Repo | Purpose |
 |------|---------|

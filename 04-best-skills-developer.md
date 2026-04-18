@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Claude Skills Là Gì?
+## Claude Skills Là Gì?
 
 **Skills = folders chứa `SKILL.md`** giúp Claude làm task chuyên sâu.
 
@@ -26,13 +26,13 @@ description: Brief description for discovery (keep concise)
 
 Đặt ở: `~/.claude/skills/<skill-name>/SKILL.md` (global) hoặc `./.claude/skills/<skill-name>/` (project)
 
-⚠️ **Security**: Skills có thể execute code → **chỉ install từ trusted sources**.
+️ **Security**: Skills có thể execute code → **chỉ install từ trusted sources**.
 
 ---
 
-## 🏆 TOP Skills Bundles Cho Developer (must-have)
+## TOP Skills Bundles Cho Developer (must-have)
 
-### 1. **obra/superpowers** ⭐⭐⭐⭐⭐ (Most recommended)
+### 1. **obra/superpowers** (Most recommended)
 **Repo**: https://github.com/obra/superpowers
 
 - **20+ battle-tested skills** core cho Claude Code
@@ -45,7 +45,7 @@ description: Brief description for discovery (keep concise)
 /plugin marketplace add obra/superpowers-marketplace
 ```
 
-### 2. **Jeffallan/claude-skills** 🔥 (1.5k ⭐)
+### 2. **Jeffallan/claude-skills** (1.5k )
 **Repo**: https://github.com/Jeffallan/claude-skills
 
 **66 specialized skills cho full-stack devs** across 12 categories:
@@ -72,7 +72,7 @@ description: Brief description for discovery (keep concise)
 
 ---
 
-## 🛠️ Top Individual Skills Cho Developer
+## ️ Top Individual Skills Cho Developer
 
 ### A. **Testing & Quality**
 
@@ -132,8 +132,8 @@ description: Brief description for discovery (keep concise)
 - Code review checklists
 - Language-specific quirks cho 20+ languages
 
-#### 10. **Trail of Bits Security Skills** 🔥
-**Repo**: https://github.com/trailofbits/claude-skills (1.3k ⭐)
+#### 10. **Trail of Bits Security Skills** 
+**Repo**: https://github.com/trailofbits/claude-skills (1.3k )
 - Static analysis với CodeQL/Semgrep
 - Variant analysis, code auditing, fix verification
 - Industry-leading security skills
@@ -197,7 +197,7 @@ description: Brief description for discovery (keep concise)
 
 ---
 
-## 🎁 Recommended Starter Pack cho Beginners
+## Recommended Starter Pack cho Beginners
 
 ### Must-Have (cài ngay tuần đầu)
 1. **obra/superpowers** - Core development skills
@@ -219,7 +219,7 @@ description: Brief description for discovery (keep concise)
 
 ---
 
-## 📥 How to Install Skills
+## How to Install Skills
 
 ### Method 1: Plugin Marketplace (easiest)
 ```bash
@@ -253,7 +253,7 @@ git pull origin main
 
 ---
 
-## 💡 Best Practices Dùng Skills
+## Best Practices Dùng Skills
 
 ### 1. **Start Small**
 - Cài 3-5 skills đầu tiên, dùng cho comfortable
@@ -288,13 +288,13 @@ Claude tự kết hợp khi relevant:
 
 ---
 
-## 🌟 Key Repos để Bookmark
+## Key Repos để Bookmark
 
 | Repo | Stars | Nội dung |
 |------|-------|---------|
-| [anthropics/skills](https://github.com/anthropics/skills) | 37.5k ⭐ | Official Agent Skills |
+| [anthropics/skills](https://github.com/anthropics/skills) | 37.5k | Official Agent Skills |
 | [obra/superpowers](https://github.com/obra/superpowers) | High | Core dev skills |
-| [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | 1.5k ⭐ | 66 full-stack skills |
+| [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | 1.5k | 66 full-stack skills |
 | [karanb192/awesome-claude-skills](https://github.com/karanb192/awesome-claude-skills) | - | 50+ verified |
 | [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | - | 1000+ multi-platform |
 | [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) | - | Curated w/ analysis |
@@ -303,7 +303,7 @@ Claude tự kết hợp khi relevant:
 
 ---
 
-## ⚠️ Security Warning
+## ️ Security Warning
 
 > "Skills can execute **arbitrary code** in Claude's environment. Only install skills from **trusted sources**."
 
@@ -320,7 +320,7 @@ Claude tự kết hợp khi relevant:
 
 ---
 
-## 📚 Resources
+## Resources
 - Skills Announcement: https://www.anthropic.com/news/skills
 - Skills Explained: https://docs.claude.com/en/docs/agents-and-tools/skills
 - Discovery sites: agentskill.sh, officialskills.sh

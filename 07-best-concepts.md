@@ -4,13 +4,13 @@
 
 ---
 
-## 🎯 Các Concepts Quan Trọng Nhất
+## Các Concepts Quan Trọng Nhất
 
 Đây không phải tools, mà là **mindset & methodology** khi work với Claude.
 
 ---
 
-## 1. **Test-First / TDD (Red-Green-Refactor)** ⭐ Quan trọng nhất
+## 1. **Test-First / TDD (Red-Green-Refactor)** Quan trọng nhất
 
 ### Vấn đề
 Claude **defaults to implementation-first**:
@@ -22,7 +22,7 @@ Claude **defaults to implementation-first**:
 
 **3 phases Red-Green-Refactor**:
 
-#### 🔴 Phase 1: RED - Write Failing Test
+#### Phase 1: RED - Write Failing Test
 ```
 Write a FAILING test for [feature].
 Do NOT write implementation yet.
@@ -40,13 +40,13 @@ Let's use TDD. First, write failing tests for:
 Do NOT implement anything yet.
 ```
 
-#### 🟢 Phase 2: GREEN - Make Test Pass
+#### Phase 2: GREEN - Make Test Pass
 ```
 Tests are written and failing.
 Now implement the MINIMUM code to make them pass.
 ```
 
-#### 🔵 Phase 3: REFACTOR - Improve
+#### Phase 3: REFACTOR - Improve
 ```
 Tests pass. Now refactor the implementation for clarity/performance
 WITHOUT changing test behavior. Tests must still pass.
@@ -63,19 +63,19 @@ Dùng skills + subagents để enforce strict TDD:
 ### Automate với Hooks
 ```json
 {
-  "hooks": {
-    "PostToolUse": [{
-      "matcher": "Edit|Write",
-      "command": "npm test --watchAll=false 2>&1 | head -20"
-    }]
-  }
+ "hooks": {
+  "PostToolUse": [{
+   "matcher": "Edit|Write",
+   "command": "npm test --watchAll=false 2>&1 | head -20"
+  }]
+ }
 }
 ```
 → Auto-run tests sau mỗi edit.
 
 ---
 
-## 2. **Explore → Plan → Code → Commit** ⭐
+## 2. **Explore → Plan → Code → Commit** 
 
 **4 phases workflow** (Anthropic official):
 
@@ -88,7 +88,7 @@ Dùng skills + subagents để enforce strict TDD:
 
 ---
 
-## 3. **Give Claude a Way to Verify** ⭐
+## 3. **Give Claude a Way to Verify** 
 
 > "This is the single **highest-leverage thing** you can do." — Anthropic
 
@@ -118,10 +118,10 @@ Implement [X]. After implementing:
 
 ## 4. **Address Root Causes, Not Symptoms**
 
-### ❌ Bad prompt
+### Bad prompt
 > "The build is failing"
 
-### ✅ Good prompt
+### Good prompt
 > "The build fails with this error: [paste]. Fix it and verify build succeeds. **Address the root cause**, don't suppress the error."
 
 ### Why this matters
@@ -140,11 +140,11 @@ Before fixing, explain:
 
 ---
 
-## 5. **Provide Specific Context** ⭐
+## 5. **Provide Specific Context** 
 
 ### Rule: Claude can infer intent, but can't read your mind.
 
-| ❌ Vague | ✅ Specific |
+| Vague | Specific |
 |---------|------------|
 | "fix the login bug" | "users report login fails after session timeout. Check `src/auth/`, especially token refresh. Write failing test first." |
 | "add tests for foo.py" | "test foo.py covering logged-out user edge case. Avoid mocks." |
@@ -339,7 +339,7 @@ Ask questions như với senior engineer:
 
 ---
 
-## 🎯 Quick Reference - Core Concepts Checklist
+## Quick Reference - Core Concepts Checklist
 
 ### Before Coding
 - [ ] Test-first (if applicable)
@@ -368,7 +368,7 @@ Ask questions như với senior engineer:
 
 ---
 
-## 📚 Resources
+## Resources
 - Anthropic Best Practices: https://code.claude.com/docs/en/best-practices
 - Steve Kinney TDD course: https://stevekinney.com/courses/ai-development/test-driven-development-with-claude
 - alexop.dev Custom TDD Workflow: https://alexop.dev/posts/custom-tdd-workflow-claude-code-vue/

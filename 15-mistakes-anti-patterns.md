@@ -4,9 +4,9 @@
 
 ---
 
-## 🚨 Top 15 Mistakes (xếp theo mức độ phổ biến & nghiêm trọng)
+## Top 15 Mistakes (xếp theo mức độ phổ biến & nghiêm trọng)
 
-### 1. **The Over-Specified CLAUDE.md** ⭐ (rất phổ biến)
+### 1. **The Over-Specified CLAUDE.md** (rất phổ biến)
 **Triệu chứng**: CLAUDE.md quá dài, Claude ignore rules quan trọng.
 > Quote từ Anthropic: "If your CLAUDE.md is too long, Claude **ignores half of it** because important rules get lost in the noise."
 
@@ -17,14 +17,14 @@
 
 ---
 
-### 2. **The Kitchen Sink Session** 🍳
+### 2. **The Kitchen Sink Session** 
 **Triệu chứng**: Bắt đầu 1 task → nhảy sang task khác → quay lại task đầu → context đầy rác.
 
 **Fix**: Dùng `/clear` giữa các tasks không liên quan.
 
 ---
 
-### 3. **Correcting Over and Over** 🔄
+### 3. **Correcting Over and Over** 
 **Triệu chứng**: Claude làm sai, bạn sửa, vẫn sai, sửa tiếp... → context đầy "failed approaches".
 
 **Fix (Anthropic official)**: Sau **2 lần correction thất bại**, `/clear` và viết lại prompt tốt hơn dựa trên những gì đã học.
@@ -33,7 +33,7 @@
 
 ---
 
-### 4. **The Trust-Then-Verify Gap** 🎭
+### 4. **The Trust-Then-Verify Gap** 
 **Triệu chứng**: Claude produce code "nhìn ổn" nhưng không handle edge cases.
 
 **Fix**:
@@ -43,7 +43,7 @@
 
 ---
 
-### 5. **The Infinite Exploration** 🌊
+### 5. **The Infinite Exploration** 
 **Triệu chứng**: "Investigate X" (no scope) → Claude đọc hàng trăm files → context đầy.
 
 **Fix**:
@@ -52,7 +52,7 @@
 
 ---
 
-### 6. **Không dùng Plan Mode khi nên dùng** 📋
+### 6. **Không dùng Plan Mode khi nên dùng** 
 **Triệu chứng**: Claude jump straight to code → solve wrong problem.
 
 > Case study (dev.to): "With Claude Code in VS Code, if you make the mistake of describing the next ticket to lay some groundwork, it will happily trot off and start making code changes **without any discussion at all**."
@@ -61,12 +61,12 @@
 
 ---
 
-### 7. **Vague Prompts (không đủ context)** 💭
+### 7. **Vague Prompts (không đủ context)** 
 **Triệu chứng**: "fix the login bug" → Claude đoán mò → sai hướng.
 
 **Fix** (before/after):
 
-| ❌ Before | ✅ After |
+| Before | After |
 |----------|---------|
 | "fix the login bug" | "users report login fails after session timeout. Check auth flow in `src/auth/`, especially token refresh. Write a failing test that reproduces, then fix." |
 | "add tests for foo.py" | "write test for foo.py covering the edge case where user is logged out. avoid mocks." |
@@ -74,7 +74,7 @@
 
 ---
 
-### 8. **Dùng `--dangerously-skip-permissions` trên Host Machine** ⚠️ CỰC NGUY HIỂM
+### 8. **Dùng `--dangerously-skip-permissions` trên Host Machine** ️ CỰC NGUY HIỂM
 **Case thật trên Reddit**: Claude ran `rm -rf tests/ patches/ plan/ ~/` → **xóa sạch home directory**.
 
 **Fix**:
@@ -84,7 +84,7 @@
 
 ---
 
-### 9. **Không Review Code Claude Viết Ra** 👀
+### 9. **Không Review Code Claude Viết Ra** 
 **Triệu chứng**: Vibe coding 100%, không hiểu code mình có.
 
 **Anti-pattern**:
@@ -97,7 +97,7 @@
 
 ---
 
-### 10. **Claude Overcomplicated Code** 🏗️
+### 10. **Claude Overcomplicated Code** ️
 **Triệu chứng**: Claude có bias viết quá nhiều code, thêm changes không ai ask.
 
 **Fix**:
@@ -106,7 +106,7 @@
 
 ---
 
-### 11. **Monolithic Codebase Không Refactor** 🏢
+### 11. **Monolithic Codebase Không Refactor** 
 **Triệu chứng**: Claude struggle với codebase lớn → context cạn nhanh → regression sau compaction.
 
 > Từ 0xhagen (Medium): "After compaction, Claude **forgets recent context** and reverts to earlier understanding of your project."
@@ -118,7 +118,7 @@
 
 ---
 
-### 12. **Không Dùng Subagents Cho Research** 🔍
+### 12. **Không Dùng Subagents Cho Research** 
 **Triệu chứng**: Bạn bảo Claude research → nó đọc 50 files → main context đầy → implementation chập chờn.
 
 **Fix**:
@@ -128,7 +128,7 @@ Prompt: "Use subagents to investigate how auth handles token refresh."
 
 ---
 
-### 13. **Không Disable Auto-Compact Nếu Có Patches** 🔧
+### 13. **Không Disable Auto-Compact Nếu Có Patches** 
 **Triệu chứng**:
 - Bạn patch system prompt để tiết kiệm tokens
 - Claude Code auto-update → phá hết patches
@@ -137,36 +137,36 @@ Prompt: "Use subagents to investigate how auth handles token refresh."
 **Fix**:
 ```json
 {
-  "env": {
-    "DISABLE_AUTOUPDATER": "1"
-  }
+ "env": {
+  "DISABLE_AUTOUPDATER": "1"
+ }
 }
 ```
 Và `/config` → Auto-compact → false.
 
 ---
 
-### 14. **Không Deny `.env` và Secrets** 🔐
+### 14. **Không Deny `.env` và Secrets** 
 **Triệu chứng**: Claude đọc `.env` vào context → leak API keys trong conversation logs/debug output.
 
 **Fix**:
 ```json
 {
-  "permissions": {
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./secrets/**)",
-      "Read(./config/credentials.json)"
-    ]
-  }
+ "permissions": {
+  "deny": [
+   "Read(./.env)",
+   "Read(./.env.*)",
+   "Read(./secrets/**)",
+   "Read(./config/credentials.json)"
+  ]
+ }
 }
 ```
-⚠️ Cảnh báo: Reddit reports cho thấy deny rules **đôi khi bị bỏ qua** → kết hợp với `.gitignore` và không store secrets trong project folder.
+️ Cảnh báo: Reddit reports cho thấy deny rules **đôi khi bị bỏ qua** → kết hợp với `.gitignore` và không store secrets trong project folder.
 
 ---
 
-### 15. **Quá Nhiều Parallel Sessions** 🤹
+### 15. **Quá Nhiều Parallel Sessions** 
 **Triệu chứng**: Mở 10 Claude Code tabs → lost track → merge conflicts → confusion.
 
 **Fix** (ykdojo rule):
@@ -177,7 +177,7 @@ Và `/config` → Auto-compact → false.
 
 ---
 
-## 🎁 Bonus Anti-Patterns (thường gặp)
+## Bonus Anti-Patterns (thường gặp)
 
 ### 16. **Không Biết Dùng `Esc`**
 - `Esc`: Stop Claude giữa chừng, context giữ nguyên
@@ -208,9 +208,9 @@ Và `/config` → Auto-compact → false.
 
 ---
 
-## 📊 Tổng Kết Nhanh - Do & Don't
+## Tổng Kết Nhanh - Do & Don't
 
-| ❌ DON'T | ✅ DO |
+| DON'T | DO |
 |---------|------|
 | CLAUDE.md dài dòng | Ngắn gọn, prune thường xuyên |
 | Long session đủ mọi topic | `/clear` giữa tasks |
@@ -228,7 +228,7 @@ Và `/config` → Auto-compact → false.
 
 ---
 
-## 🎯 Mindset Shift
+## Mindset Shift
 
 ### **Từ cũ → Sang mới**:
 - Don't rely on **finishing in one pass**
@@ -239,7 +239,7 @@ Và `/config` → Auto-compact → false.
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic Official: https://code.claude.com/docs/en/best-practices (section: "Avoid common failure patterns")
 - dev.to "Pitfalls of Claude Code": https://dev.to/cheetah100/pitfalls-of-claude-code-1nb6
 - Medium "Why Your Claude Code Sessions Keep Failing": https://0xhagen.medium.com/why-your-claude-code-sessions-keep-failing-and-how-to-fix-it-62d5a4229eaf

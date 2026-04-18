@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Key Principles (Những nguyên tắc cốt lõi)
+## Key Principles (Những nguyên tắc cốt lõi)
 
 ### 1. **Context is like milk - fresh and condensed is best**
 - Claude hoạt động tốt nhất khi context **ngắn và mới**
@@ -20,10 +20,10 @@
 ### 3. **Separate planning from implementation** (Tách lập kế hoạch khỏi code)
 - **Dùng Plan Mode** (Shift+Tab) để Claude research trước khi code
 - Workflow 4 phases (Anthropic official):
-  1. **Explore**: Plan Mode - Claude đọc files, trả lời câu hỏi, không sửa gì
-  2. **Plan**: Yêu cầu tạo implementation plan chi tiết
-  3. **Edit plan**: Ctrl+G để mở plan trong editor, sửa trực tiếp
-  4. **Execute**: Normal Mode, cho Claude code theo plan
+ 1. **Explore**: Plan Mode - Claude đọc files, trả lời câu hỏi, không sửa gì
+ 2. **Plan**: Yêu cầu tạo implementation plan chi tiết
+ 3. **Edit plan**: Ctrl+G để mở plan trong editor, sửa trực tiếp
+ 4. **Execute**: Normal Mode, cho Claude code theo plan
 
 ### 4. **Complete the write-test cycle** (Hoàn thành chu trình write-test)
 - Muốn Claude làm autonomous task → phải cho nó **cách verify kết quả**
@@ -37,7 +37,7 @@
 
 ---
 
-## 💡 Practical Tips cho Beginners
+## Practical Tips cho Beginners
 
 ### A. Essential Slash Commands (học thuộc ngay)
 | Command | Mục đích |
@@ -70,12 +70,12 @@
 
 ---
 
-## ⚡ Workflow Best Practices
+## Workflow Best Practices
 
 ### 1. **Proactive context management**
 - Tắt `auto-compact` trong `/config`
 - Khi conversation dài, yêu cầu Claude tạo `HANDOFF.md`:
-  > "Put the rest of the plan in HANDOFF.md. Explain what you tried, what worked, what didn't, so the next agent with fresh context can continue."
+ > "Put the rest of the plan in HANDOFF.md. Explain what you tried, what worked, what didn't, so the next agent with fresh context can continue."
 - Start new session, chỉ pass file path: `> HANDOFF.md`
 
 ### 2. **Multitasking với terminal tabs**
@@ -93,7 +93,7 @@
 - Dùng visual Git client (GitHub Desktop) xem diff
 - Tạo draft PR trước khi merge
 - Prompt yêu thích:
-  > "Double check everything, every single claim you produced, and at the end make a table of what you were able to verify."
+ > "Double check everything, every single claim you produced, and at the end make a table of what you were able to verify."
 
 ### 5. **Research workflow**
 - Claude Code là **Google/Deep Research replacement**
@@ -103,7 +103,7 @@
 
 ---
 
-## 🧠 Mindset quan trọng
+## Mindset quan trọng
 
 ### **Choose the right level of abstraction**
 Vibe coding không phải lúc nào cũng xấu - tùy tình huống:
@@ -127,17 +127,17 @@ Vibe coding không phải lúc nào cũng xấu - tùy tình huống:
 
 ---
 
-## 📚 Resources để học thêm
+## Resources để học thêm
 
 - **r/ClaudeAI** subreddit: Nơi chính học tips từ community
 - **Ado (@adocomplete)** on X: DevRel Anthropic, đăng tips hàng ngày trong "Advent of Claude"
-- **GitHub `ykdojo/claude-code-tips`**: 45 tips chi tiết (6.6k ⭐)
+- **GitHub `ykdojo/claude-code-tips`**: 45 tips chi tiết (6.6k )
 - **Official docs**: https://code.claude.com/docs/en/best-practices
 - **`/release-notes`**: Check features mới thường xuyên
 
 ---
 
-## ⚠️ Quick Warnings cho Beginners
+## ️ Quick Warnings cho Beginners
 
 1. **KHÔNG dùng `--dangerously-skip-permissions`** trên host machine - chỉ dùng trong container
 2. **Audit approved commands** thường xuyên (dùng tool `cc-safe`) - có case Claude `rm -rf ~/` xóa cả home directory

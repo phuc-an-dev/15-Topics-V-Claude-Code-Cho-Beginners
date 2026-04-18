@@ -4,7 +4,7 @@
 
 ---
 
-## 🧠 Vấn Đề Cốt Lõi
+## Vấn Đề Cốt Lõi
 
 Claude Code **không có memory tự động** giữa sessions (trừ CLAUDE.md files). Khi bạn:
 - Close terminal
@@ -18,7 +18,7 @@ Claude Code **không có memory tự động** giữa sessions (trừ CLAUDE.md 
 
 ---
 
-## 🎯 5 Cơ Chế Preservation (theo mức độ từ LIGHT → HEAVY)
+## 5 Cơ Chế Preservation (theo mức độ từ LIGHT → HEAVY)
 
 ### 1. **CLAUDE.md** (Always-loaded Memory)
 **Dùng cho**: Context luôn đúng cho mọi session của project.
@@ -42,7 +42,7 @@ Claude Code **không có memory tự động** giữa sessions (trừ CLAUDE.md 
 - `npm run e2e`: integration tests
 ```
 
-⚠️ Anti-pattern: Put task-specific info vào CLAUDE.md → bloat → Claude ignore half.
+️ Anti-pattern: Put task-specific info vào CLAUDE.md → bloat → Claude ignore half.
 
 ---
 
@@ -69,7 +69,7 @@ Analyze and fix the GitHub issue: $ARGUMENTS.
 
 ---
 
-### 3. **HANDOFF.md** (Session-Specific Memory) ⭐
+### 3. **HANDOFF.md** (Session-Specific Memory) 
 **Dùng cho**: Context đang-làm-dở giữa sessions.
 
 **Đây là technique quan trọng nhất cho continuity.**
@@ -101,9 +101,9 @@ We're continuing an ongoing task. Use this handoff as the current source of trut
 [What I'm trying to achieve]
 
 ## Current Status
-- ✅ Done: [completed items]
-- 🔄 In progress: [current item]
-- ⏳ To do: [remaining items]
+- Done: [completed items]
+- In progress: [current item]
+- To do: [remaining items]
 
 ## Important Context
 - Audience/tone/constraints
@@ -135,11 +135,11 @@ We're continuing an ongoing task. Use this handoff as the current source of trut
 
 **Workflow** (Anthropic official):
 1. Session 1: Plan Mode, ask Claude interview you → write `SPEC.md`
-   ```
-   I want to build [X]. Interview me using AskUserQuestion tool.
-   Cover: implementation, UI/UX, edge cases, tradeoffs.
-   Write complete spec to SPEC.md.
-   ```
+  ```
+  I want to build [X]. Interview me using AskUserQuestion tool.
+  Cover: implementation, UI/UX, edge cases, tradeoffs.
+  Write complete spec to SPEC.md.
+  ```
 2. `/clear` → fresh session
 3. Session 2: `implement SPEC.md` - clean context, focused
 
@@ -165,36 +165,36 @@ Claude explore codebase, gather context, write plan. Xong có 4 options, chọn:
 
 ---
 
-## 🔄 Decision Tree: Chọn Cơ Chế Nào?
+## Decision Tree: Chọn Cơ Chế Nào?
 
 ```
 Task cần preserve?
-├── Global cho MỌI project → ~/.claude/CLAUDE.md
-├── Global cho 1 project, luôn relevant → ./CLAUDE.md (commit vào git)
-├── Project-specific nhưng chỉ bạn dùng → ./CLAUDE.local.md (gitignore)
-├── Occasional workflow/knowledge → ./claude/skills/<name>/SKILL.md
-├── Current task in-progress → HANDOFF.md
-├── Feature đang implement → SPEC.md
-└── Mid-session agent switch → Plan Mode "bring over context"
+ Global cho MỌI project → ~/.claude/CLAUDE.md
+ Global cho 1 project, luôn relevant → ./CLAUDE.md (commit vào git)
+ Project-specific nhưng chỉ bạn dùng → ./CLAUDE.local.md (gitignore)
+ Occasional workflow/knowledge → ./claude/skills/<name>/SKILL.md
+ Current task in-progress → HANDOFF.md
+ Feature đang implement → SPEC.md
+ Mid-session agent switch → Plan Mode "bring over context"
 ```
 
 ---
 
-## 💡 Advanced Techniques
+## Advanced Techniques
 
 ### Technique A: **Auto-generate Handoff với Hook**
 Tạo hook tự động suggest `/half-clone` khi context > 85%:
 
 ```json
 {
-  "hooks": {
-    "Stop": [{
-      "hooks": [{
-        "type": "command",
-        "command": "~/.claude/scripts/check-context.sh"
-      }]
-    }]
-  }
+ "hooks": {
+  "Stop": [{
+   "hooks": [{
+    "type": "command",
+    "command": "~/.claude/scripts/check-context.sh"
+   }]
+  }]
+ }
 }
 ```
 
@@ -202,8 +202,8 @@ Tạo hook tự động suggest `/half-clone` khi context > 85%:
 
 ### Technique B: **Resume Conversations**
 ```bash
-claude --continue     # Resume most recent
-claude --resume       # Pick from recent list
+claude --continue   # Resume most recent
+claude --resume    # Pick from recent list
 claude --fork-session # Resume + branch off
 ```
 
@@ -238,7 +238,7 @@ Tạo `docs/decisions.md` (ADR - Architecture Decision Records):
 
 ---
 
-## 🎨 Pro Workflow: Multi-Session Feature Implementation
+## Pro Workflow: Multi-Session Feature Implementation
 
 ### Example: Build OAuth flow trong 3 sessions
 
@@ -273,12 +273,12 @@ Claude reads → continues Phase 2.
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Đổ Task-specific Info vào CLAUDE.md**
 ```
-❌ # Currently working on payment integration with Stripe
-❌ # TODO: Fix the token refresh bug
+ # Currently working on payment integration with Stripe
+ # TODO: Fix the token refresh bug
 ```
 → Làm CLAUDE.md bloat, Claude ignore actual rules.
 → Put vào HANDOFF.md instead.
@@ -288,17 +288,17 @@ Claude reads → continues Phase 2.
 
 ### 3. **HANDOFF.md Quá Sơ Sài**
 ```
-❌ "Working on auth. Need to add OAuth."
+ "Working on auth. Need to add OAuth."
 ```
 → Next session không biết: Google/GitHub? Files đã touch? Approaches thất bại?
 
 Good HANDOFF:
 ```markdown
 ## Status
-- ✅ Added passport-google-oauth20 dependency
-- ✅ Created `/auth/google/callback` route (file: src/routes/auth.ts)
-- ❌ Tried to use passport.session() - doesn't work with our JWT setup
-- 🔄 Currently: implementing JWT-based session from OAuth response
+- Added passport-google-oauth20 dependency
+- Created `/auth/google/callback` route (file: src/routes/auth.ts)
+- Tried to use passport.session() - doesn't work with our JWT setup
+- Currently: implementing JWT-based session from OAuth response
 
 ## Files Changed
 - src/routes/auth.ts (callback handler, line 45-80)
@@ -324,7 +324,7 @@ HANDOFF.md
 
 ---
 
-## 📋 Templates Ready-to-Use
+## Templates Ready-to-Use
 
 ### Template 1: Simple Handoff (end of session)
 ```
@@ -355,7 +355,7 @@ HANDOFF.md
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic blog "Using Claude Code: session management": https://claude.com/blog/using-claude-code-session-management-and-1m-context
 - GitHub Issue #11455 (session handoff feature request): https://github.com/anthropics/claude-code/issues/11455
 - Handoff Prompt Guide: https://www.jdhodges.com/blog/ai-session-handoffs-keep-context-across-conversations/

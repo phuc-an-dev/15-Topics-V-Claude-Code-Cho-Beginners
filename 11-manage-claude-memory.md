@@ -4,7 +4,7 @@
 
 ---
 
-## 🧠 3 Lớp Memory Trong Claude Ecosystem
+## 3 Lớp Memory Trong Claude Ecosystem
 
 Understand **3 lớp memory** tách biệt:
 
@@ -13,7 +13,7 @@ Understand **3 lớp memory** tách biệt:
 - Available on Free/Pro/Max plans (từ March 2026)
 - Tự động: Claude nhớ preferences across chats
 
-### Layer 2: **CLAUDE.md + Auto Memory** (Claude Code) ⭐
+### Layer 2: **CLAUDE.md + Auto Memory** (Claude Code) 
 - Cho developers dùng Claude Code CLI
 - **Đây là layer quan trọng nhất cho bạn**
 - 2 mechanisms: Manual (CLAUDE.md) + Auto (MEMORY.md)
@@ -27,7 +27,7 @@ Understand **3 lớp memory** tách biệt:
 
 ---
 
-## 📝 CLAUDE.md - Manual Memory
+## CLAUDE.md - Manual Memory
 
 ### Bản chất
 - File markdown **Claude đọc ở đầu mỗi session**
@@ -36,24 +36,24 @@ Understand **3 lớp memory** tách biệt:
 
 ### Locations (theo precedence từ CAO → THẤP)
 ```
-1. ./.claude/CLAUDE.local.md    (gitignored, personal)
-2. ./CLAUDE.md                  (project, commit git)
-3. ~/.claude/CLAUDE.md          (user global)
+1. ./.claude/CLAUDE.local.md  (gitignored, personal)
+2. ./CLAUDE.md         (project, commit git)
+3. ~/.claude/CLAUDE.md     (user global)
 ```
 
-### Monorepo Loading Behavior ⚡ (quan trọng)
+### Monorepo Loading Behavior (quan trọng)
 
 > "Claude walks **UP** the directory tree, loads CLAUDE.md files ở startup."
 
 ```
 /project/
-├── CLAUDE.md                ← Load ở startup
-├── frontend/
-│   └── CLAUDE.md            ← Load LAZY (khi Claude đọc files trong frontend/)
-├── backend/
-│   └── CLAUDE.md            ← Load LAZY
-└── api/
-    └── CLAUDE.md            ← Load LAZY
+ CLAUDE.md        ← Load ở startup
+ frontend/
+  CLAUDE.md      ← Load LAZY (khi Claude đọc files trong frontend/)
+ backend/
+  CLAUDE.md      ← Load LAZY
+ api/
+   CLAUDE.md      ← Load LAZY
 ```
 
 **Rules**:
@@ -63,7 +63,7 @@ Understand **3 lớp memory** tách biệt:
 
 ---
 
-## ⭐ Nguyên Tắc Vàng CLAUDE.md
+## Nguyên Tắc Vàng CLAUDE.md
 
 ### Rule 1: **Keep It Minimal** (< 200 lines!)
 > "Files over 200 lines consume more context and may **reduce adherence**." — Anthropic docs
@@ -97,7 +97,7 @@ Emphasis keywords ("IMPORTANT", "YOU MUST", "NEVER") improve adherence.
 
 ---
 
-## 🎨 CLAUDE.md Template Siêu Gọn (< 100 lines)
+## CLAUDE.md Template Siêu Gọn (< 100 lines)
 
 ```markdown
 # Project: <Name>
@@ -132,9 +132,9 @@ Emphasis keywords ("IMPORTANT", "YOU MUST", "NEVER") improve adherence.
 
 ---
 
-## ✅ INCLUDE trong CLAUDE.md
+## INCLUDE trong CLAUDE.md
 
-| ✅ Include | ❌ Exclude |
+| Include | Exclude |
 |-----------|----------|
 | Bash commands Claude can't guess | Things Claude figures out by reading code |
 | Code style khác defaults | Standard language conventions |
@@ -146,7 +146,7 @@ Emphasis keywords ("IMPORTANT", "YOU MUST", "NEVER") improve adherence.
 
 ---
 
-## 🤖 Auto Memory (MEMORY.md)
+## Auto Memory (MEMORY.md)
 
 ### Giới thiệu (v2.1.59+)
 Claude tự maintain `MEMORY.md` ở `~/.claude/projects/<project>/memory/MEMORY.md`.
@@ -166,7 +166,7 @@ Claude tự maintain `MEMORY.md` ở `~/.claude/projects/<project>/memory/MEMORY
 
 ### Toggle Auto Memory
 ```bash
-/memory  # Interactive management
+/memory # Interactive management
 ```
 
 Or settings:
@@ -183,14 +183,14 @@ Or settings:
 
 ---
 
-## 🔄 What Survives Compaction
+## What Survives Compaction
 
-### Survives ✅
+### Survives 
 - **Project-root CLAUDE.md**: Re-read from disk sau `/compact`, re-injected
 - **Files trên disk**: HANDOFF.md, SPEC.md, docs/
 - **Git commits**: `git log` luôn accessible
 
-### Doesn't Survive ❌
+### Doesn't Survive 
 - Conversation-only instructions ("always do X")
 - Nested CLAUDE.md subdirectories (lazy reload, không auto-reinject)
 - Clicked decisions không ghi xuống
@@ -199,7 +199,7 @@ Or settings:
 
 ---
 
-## 🪄 Hash `#` Shortcut
+## Hash `#` Shortcut
 
 Gõ `#` trong Claude Code input → fast add to CLAUDE.md:
 ```
@@ -215,7 +215,7 @@ Claude prompt bạn chọn:
 
 ---
 
-## 🤝 Subagent Memory (v2.1.33+, Feb 2026)
+## Subagent Memory (v2.1.33+, Feb 2026)
 
 ### Frontmatter `memory:` field
 ```markdown
@@ -224,7 +224,7 @@ name: code-reviewer
 description: Reviews code for quality
 tools: Read, Write, Edit, Bash
 model: sonnet
-memory: user  # ← NEW
+memory: user # ← NEW
 ---
 
 As you review code, update your agent memory with patterns,
@@ -250,14 +250,14 @@ As you work, save architectural decisions and patterns.
 
 ---
 
-## 🚀 Advanced: External Memory Systems
+## Advanced: External Memory Systems
 
 ### 1. **memory-mcp** (suede/claude-code-memory)
 - MCP server cho persistent memory
 - Silent capture (hooks sau mỗi response)
 - 2-tier architecture:
-  - **Tier 1**: CLAUDE.md (~150 lines, auto-updated)
-  - **Tier 2**: `.memory/state.json` (unlimited, access qua MCP tools)
+ - **Tier 1**: CLAUDE.md (~150 lines, auto-updated)
+ - **Tier 2**: `.memory/state.json` (unlimited, access qua MCP tools)
 - Cost: ~$0.05-0.10/day (Haiku cho extraction)
 - Install: `npm install -g claude-code-memory && memory-mcp setup`
 
@@ -276,24 +276,24 @@ As you work, save architectural decisions and patterns.
 
 ---
 
-## 📂 Pattern: Project Memory Structure
+## Pattern: Project Memory Structure
 
 ### Recommended folder layout
 ```
 project/
-├── CLAUDE.md                    # Project constitution (< 100 lines)
-├── .claude/
-│   ├── settings.json
-│   ├── agents/                  # Subagent definitions
-│   └── skills/                  # Custom skills
-├── docs/
-│   ├── architecture.md          # Referenced via @docs/
-│   ├── conventions.md
-│   └── decisions/               # ADRs
-│       ├── 001-use-postgres.md
-│       └── 002-rest-vs-graphql.md
-├── SPEC.md                      # Current feature spec (nếu có)
-└── HANDOFF.md                   # Session continuation notes
+ CLAUDE.md          # Project constitution (< 100 lines)
+ .claude/
+  settings.json
+  agents/         # Subagent definitions
+  skills/         # Custom skills
+ docs/
+  architecture.md     # Referenced via @docs/
+  conventions.md
+  decisions/        # ADRs
+    001-use-postgres.md
+    002-rest-vs-graphql.md
+ SPEC.md           # Current feature spec (nếu có)
+ HANDOFF.md          # Session continuation notes
 ```
 
 ### Reference trong CLAUDE.md
@@ -306,17 +306,17 @@ project/
 
 ---
 
-## 🛡️ claudeMdExcludes (Security)
+## ️ claudeMdExcludes (Security)
 
 Prevent untrusted CLAUDE.md from loading (vd từ git submodules):
 
 ```json
 {
-  "claudeMdExcludes": [
-    "node_modules/**/CLAUDE.md",
-    "vendor/**/CLAUDE.md",
-    "untrusted-deps/**/CLAUDE.md"
-  ]
+ "claudeMdExcludes": [
+  "node_modules/**/CLAUDE.md",
+  "vendor/**/CLAUDE.md",
+  "untrusted-deps/**/CLAUDE.md"
+ ]
 }
 ```
 
@@ -324,7 +324,7 @@ Managed policy CLAUDE.md **cannot be excluded** → org-wide rules luôn apply.
 
 ---
 
-## 🎯 Pro Patterns
+## Pro Patterns
 
 ### Pattern 1: **Structured Initializer Session**
 First session của project:
@@ -343,9 +343,9 @@ Future sessions load these artifacts → recover state instantly.
 
 ## In Progress
 - [ ] User authentication
-  - [x] Login endpoint
-  - [ ] OAuth callback
-  - [ ] Token refresh
+ - [x] Login endpoint
+ - [ ] OAuth callback
+ - [ ] Token refresh
 
 ## Completed
 - [x] Database schema
@@ -370,7 +370,7 @@ Before we stop, update docs/progress.md với:
 ### Pattern 4: **Audit Memory Regularly**
 Mỗi vài tuần:
 ```bash
-find . -name "CLAUDE.md"  # List all CLAUDE.md in project
+find . -name "CLAUDE.md" # List all CLAUDE.md in project
 ```
 
 Ask Claude:
@@ -384,7 +384,7 @@ Suggest concrete edits.
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **CLAUDE.md quá dài**
 > "If your CLAUDE.md is too long, Claude **ignores half of it**." — Anthropic
@@ -392,16 +392,16 @@ Suggest concrete edits.
 Fix: Ruthlessly prune. Target < 200 lines.
 
 ### 2. **Task-specific info trong CLAUDE.md**
-❌ "Currently working on payment integration"
-✅ HANDOFF.md hoặc `docs/progress.md`
+ "Currently working on payment integration"
+ HANDOFF.md hoặc `docs/progress.md`
 
 ### 3. **Không Track What Claude Learns**
 Auto Memory disabled → lose valuable learnings across sessions.
 Fix: Enable auto memory, review `/memory` periodically.
 
 ### 4. **Committing Personal Preferences**
-❌ "Always use tabs, I hate spaces" trong project CLAUDE.md
-✅ `CLAUDE.local.md` (gitignored) hoặc `~/.claude/CLAUDE.md`
+ "Always use tabs, I hate spaces" trong project CLAUDE.md
+ `CLAUDE.local.md` (gitignored) hoặc `~/.claude/CLAUDE.md`
 
 ### 5. **Trust Conversation-only Instructions**
 Nói "always do X" trong chat → `/compact` xảy ra → Claude quên.
@@ -425,7 +425,7 @@ Fix: `/memory` → browse → edit hoặc delete wrong learnings.
 
 ---
 
-## 📋 Checklist Setup Memory
+## Checklist Setup Memory
 
 ### Week 1: Foundation
 - [ ] Create `./CLAUDE.md` < 100 lines
@@ -447,7 +447,7 @@ Fix: `/memory` → browse → edit hoặc delete wrong learnings.
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic Official: https://code.claude.com/docs/en/memory
 - Anthropic Memory Tool API: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
 - shanraisshan best practices: https://github.com/shanraisshan/claude-code-best-practice/blob/main/best-practice/claude-memory.md

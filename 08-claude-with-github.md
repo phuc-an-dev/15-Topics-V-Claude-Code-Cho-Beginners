@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Core Rule: **Dùng `gh` CLI, KHÔNG dùng web fetch**
+## Core Rule: **Dùng `gh` CLI, KHÔNG dùng web fetch**
 
 > "Use `gh` CLI to interact with GitHub. **Do not use web fetch**." — Anthropic official code-review plugin
 
@@ -15,13 +15,13 @@
 
 ### Install
 ```bash
-brew install gh          # macOS
-gh auth login            # Authenticate once
+brew install gh     # macOS
+gh auth login      # Authenticate once
 ```
 
 ---
 
-## 🚀 Basic GitHub Workflow Với Claude
+## Basic GitHub Workflow Với Claude
 
 ### 1. Để Claude handle Git/GitHub commands
 ```
@@ -40,36 +40,36 @@ Claude sẽ:
 
 | Action | Auto-allow? | Lý do |
 |--------|------------|-------|
-| `git pull` | ✅ OK | Không phá origin |
-| `git push` | ⚠️ Hỏi | Có thể break origin |
-| `git reset --hard` | ❌ Hỏi | Mất work |
-| `gh pr create --draft` | ✅ OK | Low risk |
-| `gh pr merge` | ❌ Hỏi | Thay đổi main branch |
-| `git commit` | ✅ OK | Local only |
+| `git pull` | OK | Không phá origin |
+| `git push` | ️ Hỏi | Có thể break origin |
+| `git reset --hard` | Hỏi | Mất work |
+| `gh pr create --draft` | OK | Low risk |
+| `gh pr merge` | Hỏi | Thay đổi main branch |
+| `git commit` | OK | Local only |
 
 ### 3. Settings.json recommendations
 ```json
 {
-  "permissions": {
-    "allow": [
-      "Bash(git pull:*)",
-      "Bash(git status:*)",
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(gh pr list:*)",
-      "Bash(gh issue view:*)"
-    ]
-  },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+ "permissions": {
+  "allow": [
+   "Bash(git pull:*)",
+   "Bash(git status:*)",
+   "Bash(git log:*)",
+   "Bash(git diff:*)",
+   "Bash(gh pr list:*)",
+   "Bash(gh issue view:*)"
+  ]
+ },
+ "attribution": {
+  "commit": "",
+  "pr": ""
+ }
 }
 ```
 
 ---
 
-## 💡 Common Workflows
+## Common Workflows
 
 ### A. Commit với Descriptive Messages
 
@@ -138,27 +138,27 @@ Then go through file-by-file:
 
 ---
 
-## 🔥 Advanced: GraphQL Queries qua `gh`
+## Advanced: GraphQL Queries qua `gh`
 
 ### Case: Xem edit history of PR description
 ```bash
 gh api graphql -f query='
-  query {
-    repository(owner: "owner", name: "repo") {
-      pullRequest(number: 123) {
-        userContentEdits(first: 100) {
-          nodes { editedAt editor { login } }
-        }
-      }
+ query {
+  repository(owner: "owner", name: "repo") {
+   pullRequest(number: 123) {
+    userContentEdits(first: 100) {
+     nodes { editedAt editor { login } }
     }
-  }'
+   }
+  }
+ }'
 ```
 
 Claude có thể construct GraphQL queries cho needs đặc biệt.
 
 ---
 
-## 🎨 Claude Code Review Plugin (Official)
+## Claude Code Review Plugin (Official)
 
 ### Official plugin từ Anthropic
 **Repo**: `anthropics/claude-code` - path: `plugins/code-review/`
@@ -190,14 +190,14 @@ Claude có thể construct GraphQL queries cho needs đặc biệt.
 Found 3 issues:
 
 1. Missing error handling for OAuth callback
-   (CLAUDE.md says "Always handle OAuth errors")
-   https://github.com/owner/repo/blob/abc123/src/auth.ts#L67-L72
+  (CLAUDE.md says "Always handle OAuth errors")
+  https://github.com/owner/repo/blob/abc123/src/auth.ts#L67-L72
 
 2. Memory leak: OAuth state not cleaned up
-   https://github.com/owner/repo/blob/abc123/src/auth.ts#L88-L95
+  https://github.com/owner/repo/blob/abc123/src/auth.ts#L88-L95
 
 3. Inconsistent naming pattern
-   https://github.com/owner/repo/blob/abc123/src/utils.ts#L23-L28
+  https://github.com/owner/repo/blob/abc123/src/utils.ts#L23-L28
 ```
 
 ### Tune Threshold
@@ -209,13 +209,13 @@ Change `80` to your preference (0-100).
 
 ---
 
-## 🤖 Managed Code Review (Team/Enterprise)
+## Managed Code Review (Team/Enterprise)
 
 ### Anthropic's hosted Code Review
 - Auto runs on PR open/update
 - Posts inline comments as Claude GitHub bot
 - Each finding has severity (Important / Nit / Pre-existing)
-- 👍/👎 buttons for feedback (Anthropic uses để tune reviewer)
+- / buttons for feedback (Anthropic uses để tune reviewer)
 - Check run appears alongside CI checks (neutral conclusion, never blocks)
 
 ### Trigger re-review
@@ -224,7 +224,7 @@ Comment `@claude review` như top-level PR comment.
 ### Machine-readable output
 ```bash
 gh api repos/OWNER/REPO/check-runs/CHECK_RUN_ID \
-  --jq '.output.text | split("bughunter-severity: ")[1] | split(" -->")[0] | fromjson'
+ --jq '.output.text | split("bughunter-severity: ")[1] | split(" -->")[0] | fromjson'
 # Returns: {"normal": 2, "nit": 1, "pre_existing": 0}
 ```
 
@@ -232,7 +232,7 @@ Use cho gating merges: nếu `normal > 0`, block merge trong CI.
 
 ---
 
-## 🛠️ Custom GitHub Workflows via Skills
+## ️ Custom GitHub Workflows via Skills
 
 ### Skill: `/dx:gha <url>` (từ ykdojo/claude-code-tips)
 **Purpose**: Analyze GitHub Actions failures
@@ -266,7 +266,7 @@ When asked to commit:
 
 ---
 
-## 📋 CI/CD Integration
+## CI/CD Integration
 
 ### GitHub Actions với Claude
 Anthropic provides official GitHub Actions integration:
@@ -279,14 +279,14 @@ Anthropic provides official GitHub Actions integration:
 name: Claude Review
 on: [pull_request]
 jobs:
-  review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: anthropics/claude-code-action@v1
-        with:
-          prompt: "Review the changes in this PR"
-          output-format: "json"
+ review:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: anthropics/claude-code-action@v1
+    with:
+     prompt: "Review the changes in this PR"
+     output-format: "json"
 ```
 
 ### Pre-commit Hooks
@@ -298,19 +298,19 @@ claude -p "Review staged changes for obvious issues" --output-format text
 
 ---
 
-## 🚨 Anti-Patterns
+## Anti-Patterns
 
 ### 1. **Web fetch thay vì `gh`**
-❌ "Go to github.com/owner/repo/pull/123 and..."
-✅ "Use `gh pr view 123` to..."
+ "Go to github.com/owner/repo/pull/123 and..."
+ "Use `gh pr view 123` to..."
 
 ### 2. **Auto-approve `gh pr merge`**
-❌ Để Claude merge tự động
-✅ Draft PR → human review → human merge
+ Để Claude merge tự động
+ Draft PR → human review → human merge
 
 ### 3. **Commit trực tiếp vào main**
-❌ Let Claude push to main branch
-✅ Always PR workflow, protected branches
+ Let Claude push to main branch
+ Always PR workflow, protected branches
 
 ### 4. **Ignore Attribution Settings**
 Mặc định Claude thêm "Co-Authored-By: Claude" vào commits.
@@ -321,7 +321,7 @@ Mặc định Claude thêm "Co-Authored-By: Claude" vào commits.
 
 ### 5. **Paste GitHub URLs vào context**
 URLs tốn tokens parse.
-✅ Dùng `gh issue view` / `gh pr view` để Claude read directly.
+ Dùng `gh issue view` / `gh pr view` để Claude read directly.
 
 ### 6. **Không dùng Draft PRs**
 Draft PRs = low-risk workflow cho Claude.
@@ -330,7 +330,7 @@ Draft PRs = low-risk workflow cho Claude.
 
 ---
 
-## 🎯 Prompt Templates
+## Prompt Templates
 
 ### Template 1: Create Feature Branch + PR
 ```
@@ -341,9 +341,9 @@ I'm implementing feature X.
 4. Push as draft PR
 5. Link to issue #<N>
 6. Add checklist to PR description:
-   - [ ] Tests added
-   - [ ] Documentation updated
-   - [ ] No breaking changes
+  - [ ] Tests added
+  - [ ] Documentation updated
+  - [ ] No breaking changes
 ```
 
 ### Template 2: Investigate CI Failure
@@ -379,7 +379,7 @@ Once found, analyze what changed and propose fix.
 
 ---
 
-## 📊 Useful `gh` Commands Claude Can Use
+## Useful `gh` Commands Claude Can Use
 
 | Command | Purpose |
 |---------|---------|
@@ -397,7 +397,7 @@ Once found, analyze what changed and propose fix.
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic Code Review docs: https://code.claude.com/docs/en/code-review
 - Official code-review plugin: https://github.com/anthropics/claude-code/tree/main/plugins/code-review
 - `ykdojo/claude-code-tips` Tip 4 (git/gh), Tip 26 (PR reviews), Tip 29 (DevOps)

@@ -4,11 +4,11 @@
 
 ---
 
-## 🎯 Starter Pack cho React + TypeScript Developer
+## Starter Pack cho React + TypeScript Developer
 
 ### Must-Have (Top 5 - install ngay)
 
-#### 1. **Anthropic Frontend Design** 🔥 (65k ⭐)
+#### 1. **Anthropic Frontend Design** (65k )
 **Repo**: https://github.com/anthropics/skills (path: `skills/frontend-design/`)
 
 - **Skill số 1** cho frontend work
@@ -22,7 +22,7 @@ git clone https://github.com/anthropics/skills.git
 cp -r skills/skills/frontend-design ~/.claude/skills/
 ```
 
-#### 2. **Vercel React Best Practices** 🔥
+#### 2. **Vercel React Best Practices** 
 - **57 performance rules** across 8 categories, prioritized by impact
 - Built by Vercel Engineering team
 - Covers: bundle size, render optimization, waterfall elimination, Suspense boundaries
@@ -37,7 +37,7 @@ npx claude-code-templates@latest --skill development/react-best-practices
 - `async-parallel`: `Promise.all()` cho independent operations
 - `async-suspense-boundaries`: Stream content với Suspense thay vì wait hết data
 
-#### 3. **mattpocock/skills** (Total TypeScript) ⭐
+#### 3. **mattpocock/skills** (Total TypeScript) 
 **Repo**: https://github.com/mattpocock/skills
 
 **17 dev workflow skills** từ Matt Pocock (creator Total TypeScript):
@@ -66,7 +66,7 @@ TypeScript 5.9+ enterprise-grade guidance:
 - NestJS Development: DTOs, RBAC, authentication
 - Modern Toolchain: Vite 7, pnpm, ESLint 9 flat config, Vitest
 
-#### 5. **spartan-ai-toolkit** (Quality Gates) 🌟
+#### 5. **spartan-ai-toolkit** (Quality Gates) 
 **Repo**: https://github.com/spartan-stratos/spartan-ai-toolkit
 
 **Key feature**: Chạy **typecheck → lint → test → review** in sequence. Won't move to next step nếu previous fail.
@@ -77,19 +77,19 @@ TypeScript 5.9+ enterprise-grade guidance:
 
 ---
 
-## 🎨 UI/UX Focused Skills
+## UI/UX Focused Skills
 
 ### 6. **Web Design Guidelines**
 - Accessibility compliance (WCAG 2.1/2.2)
 - Contrast ratios, keyboard nav, screen reader support
 - Pair với Frontend Design skill (complementary, không conflict)
 
-### 7. **Nothing Design Language** (1.2k ⭐)
+### 7. **Nothing Design Language** (1.2k )
 **Repo**: https://github.com/nothing-design-skill
 - Generate UI in Nothing design language
 - Monochrome, typographic, industrial aesthetic
 
-### 8. **GSAP Skills** 🔥 (1.5k ⭐)
+### 8. **GSAP Skills** (1.5k )
 **Repo**: Official GSAP skills
 - Correctly use GreenSock Animation Platform
 - Best practices, animation patterns, plugin usage
@@ -101,7 +101,7 @@ TypeScript 5.9+ enterprise-grade guidance:
 
 ---
 
-## 🔧 TypeScript-Specific Deep Dive
+## TypeScript-Specific Deep Dive
 
 ### 10. **typescript-pro Subagent** (VoltAgent)
 **Repo**: https://github.com/VoltAgent/awesome-claude-code-subagents
@@ -120,48 +120,48 @@ Subagent chuyên TypeScript 5.0+:
 
 ---
 
-## 🏗️ Project Structure Recommendations
+## ️ Project Structure Recommendations
 
 ### Feature Slicing (từ Medium article của Principal Engineer)
 ```
 src/
-├── features/
-│   └── <feature-name>/
-│       ├── screens/         # Screen/page components
-│       ├── components/      # Feature-specific components
-│       ├── hooks/          # Custom hooks
-│       ├── types/          # TypeScript interfaces
-│       ├── services/       # API calls (TanStack Query)
-│       ├── __tests__/      # Colocated tests
-│       └── index.ts        # Barrel export
-├── components/
-│   ├── ui/                # shadcn/ui components
-│   ├── common/            # Reusable
-│   └── forms/             # Form components
-├── hooks/                 # Global hooks
-├── context/               # React Context providers
-├── types/                 # Global types
-└── utils/                 # Utilities
+ features/
+  <feature-name>/
+    screens/     # Screen/page components
+    components/   # Feature-specific components
+    hooks/     # Custom hooks
+    types/     # TypeScript interfaces
+    services/    # API calls (TanStack Query)
+    __tests__/   # Colocated tests
+    index.ts    # Barrel export
+ components/
+  ui/        # shadcn/ui components
+  common/      # Reusable
+  forms/       # Form components
+ hooks/         # Global hooks
+ context/        # React Context providers
+ types/         # Global types
+ utils/         # Utilities
 ```
 
 ### Path Aliases (tsconfig.json)
 ```json
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"],
-      "@/hooks/*": ["src/hooks/*"],
-      "@/types/*": ["src/types/*"]
-    }
+ "compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+   "@/*": ["src/*"],
+   "@/components/*": ["src/components/*"],
+   "@/hooks/*": ["src/hooks/*"],
+   "@/types/*": ["src/types/*"]
   }
+ }
 }
 ```
 
 ---
 
-## 💡 CLAUDE.md Template cho React + TS Project
+## CLAUDE.md Template cho React + TS Project
 
 ```markdown
 # Project: [Tên]
@@ -203,29 +203,29 @@ src/
 
 ---
 
-## 🪝 Useful Hooks cho Frontend Dev
+## Useful Hooks cho Frontend Dev
 
 ```json
 {
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Write",
-        "command": "echo 'Remember: Run tsc --noEmit after writing .tsx files'"
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash(npm install*)",
-        "command": "echo 'Verify package.json for unexpected dependency additions'"
-      }
-    ],
-    "Stop": [
-      {
-        "command": "terminal-notifier -message 'Claude finished the task' -title 'Claude Code'"
-      }
-    ]
-  }
+ "hooks": {
+  "PreToolUse": [
+   {
+    "matcher": "Write",
+    "command": "echo 'Remember: Run tsc --noEmit after writing .tsx files'"
+   }
+  ],
+  "PostToolUse": [
+   {
+    "matcher": "Bash(npm install*)",
+    "command": "echo 'Verify package.json for unexpected dependency additions'"
+   }
+  ],
+  "Stop": [
+   {
+    "command": "terminal-notifier -message 'Claude finished the task' -title 'Claude Code'"
+   }
+  ]
+ }
 }
 ```
 
@@ -233,7 +233,7 @@ src/
 
 ---
 
-## 🎯 Recommended Install Order (theo tuần)
+## Recommended Install Order (theo tuần)
 
 ### Week 1 - Foundations
 1. obra/superpowers (TDD + debugging + collaboration)
@@ -255,7 +255,7 @@ src/
 
 ---
 
-## 📋 Example Prompts Tận Dụng Skills
+## Example Prompts Tận Dụng Skills
 
 ### "Build a component" - skills auto-combine
 ```
@@ -282,7 +282,7 @@ Profile first, then fix root cause.
 
 ---
 
-## 🚫 Common Pitfalls
+## Common Pitfalls
 
 ### 1. **Over-using React.memo / useMemo**
 Vercel skill cảnh báo: Dev thường jump vào memoization trong khi root cause là waterfall API calls hoặc barrel imports.
@@ -298,13 +298,13 @@ Every screen cần wrap trong ErrorBoundary - không để bug crash entire app.
 
 ### 5. **Barrel imports trong hot paths**
 ```tsx
-❌ import { Icon1, Icon2 } from '@/components' // loads ALL
-✅ import { Icon1 } from '@/components/Icon1' // tree-shakeable
+ import { Icon1, Icon2 } from '@/components' // loads ALL
+ import { Icon1 } from '@/components/Icon1' // tree-shakeable
 ```
 
 ---
 
-## 📚 Key Repos Summary
+## Key Repos Summary
 
 | Repo | Stars | Focus |
 |------|-------|-------|
@@ -318,7 +318,7 @@ Every screen cần wrap trong ErrorBoundary - không để bug crash entire app.
 
 ---
 
-## 📚 Sources
+## Sources
 - Snyk "Top 8 Claude Skills for UI/UX Engineers": https://snyk.io/articles/top-claude-skills-ui-ux-engineers/
 - "The 10 Claude Code Skills I Actually Use": https://www.welcomedeveloper.com/posts/the-10-claude-code-skills/
 - Cars24 "Claude Code for React & React Native": Medium article by Ankit Bhalla

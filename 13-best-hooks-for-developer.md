@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Hooks Là Gì?
+## Hooks Là Gì?
 
 **Hooks = Deterministic automation scripts** chạy ở specific lifecycle events trong Claude Code.
 
@@ -17,9 +17,9 @@
 
 ---
 
-## 📋 21 Lifecycle Events (focus 10 quan trọng nhất)
+## 21 Lifecycle Events (focus 10 quan trọng nhất)
 
-### Tool Events ⭐
+### Tool Events 
 1. **`PreToolUse`** - Trước khi tool run (có thể block/modify)
 2. **`PostToolUse`** - Sau khi tool xong successful
 3. **`PostToolUseFailure`** - Khi tool fail (context cho Claude)
@@ -38,7 +38,7 @@
 
 ---
 
-## 🛠️ 4 Hook Handler Types
+## ️ 4 Hook Handler Types
 
 | Type | Purpose | % Usage |
 |------|---------|---------|
@@ -49,22 +49,22 @@
 
 ---
 
-## 🔥 10 Best Hooks Cho Developer (Ready-to-Use)
+## 10 Best Hooks Cho Developer (Ready-to-Use)
 
-### 1. **Auto-Format After Edits** ⭐ (must-have)
+### 1. **Auto-Format After Edits** (must-have)
 Prettier sau mỗi file write:
 
 ```json
 {
-  "hooks": {
-    "PostToolUse": [{
-      "matcher": "Write|Edit|MultiEdit",
-      "hooks": [{
-        "type": "command",
-        "command": "npx prettier --write \"$CLAUDE_TOOL_INPUT_FILE_PATH\""
-      }]
-    }]
-  }
+ "hooks": {
+  "PostToolUse": [{
+   "matcher": "Write|Edit|MultiEdit",
+   "hooks": [{
+    "type": "command",
+    "command": "npx prettier --write \"$CLAUDE_TOOL_INPUT_FILE_PATH\""
+   }]
+  }]
+ }
 }
 ```
 
@@ -74,84 +74,84 @@ Prettier sau mỗi file write:
 - Rust: `cargo fmt`
 - Java: `mvn spotless:apply`
 
-### 2. **Block Dangerous Commands** 🛡️ (security)
+### 2. **Block Dangerous Commands** ️ (security)
 ```json
 {
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "Bash",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf /|DROP TABLE|:(){ :|:' && exit 2 || exit 0"
-      }]
-    }]
-  }
+ "hooks": {
+  "PreToolUse": [{
+   "matcher": "Bash",
+   "hooks": [{
+    "type": "command",
+    "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf /|DROP TABLE|:(){ :|:' && exit 2 || exit 0"
+   }]
+  }]
+ }
 }
 ```
 
 Chặn: `rm -rf /`, `DROP TABLE`, fork bombs, etc.
 
-⚠️ **Critical**: `exit 2` = block (không phải `exit 1`). Đây là mistake phổ biến nhất.
+️ **Critical**: `exit 2` = block (không phải `exit 1`). Đây là mistake phổ biến nhất.
 
 ### 3. **Auto-Run Tests After Code Changes**
 ```json
 {
-  "hooks": {
-    "PostToolUse": [{
-      "matcher": "Edit|Write",
-      "hooks": [{
-        "type": "command",
-        "command": "npm test 2>&1 | tail -20",
-        "timeout": 60000
-      }]
-    }]
-  }
+ "hooks": {
+  "PostToolUse": [{
+   "matcher": "Edit|Write",
+   "hooks": [{
+    "type": "command",
+    "command": "npm test 2>&1 | tail -20",
+    "timeout": 60000
+   }]
+  }]
+ }
 }
 ```
 
 ### 4. **Type Check After TSX Edits** (React/TS devs)
 ```json
 {
-  "hooks": {
-    "PostToolUse": [{
-      "matcher": "Edit|Write",
-      "if": "Edit(**/*.tsx)|Write(**/*.tsx)",
-      "hooks": [{
-        "type": "command",
-        "command": "npx tsc --noEmit 2>&1 | head -30"
-      }]
-    }]
-  }
+ "hooks": {
+  "PostToolUse": [{
+   "matcher": "Edit|Write",
+   "if": "Edit(**/*.tsx)|Write(**/*.tsx)",
+   "hooks": [{
+    "type": "command",
+    "command": "npx tsc --noEmit 2>&1 | head -30"
+   }]
+  }]
+ }
 }
 ```
 
-### 5. **Inject Git Context on Session Start** ⭐
+### 5. **Inject Git Context on Session Start** 
 ```json
 {
-  "hooks": {
-    "SessionStart": [{
-      "hooks": [{
-        "type": "command",
-        "command": "echo '{\"additionalContext\": \"Branch: '$(git branch --show-current)'\\nRecent commits:\\n'$(git log --oneline -5)'\"}'"
-      }]
-    }]
-  }
+ "hooks": {
+  "SessionStart": [{
+   "hooks": [{
+    "type": "command",
+    "command": "echo '{\"additionalContext\": \"Branch: '$(git branch --show-current)'\\nRecent commits:\\n'$(git log --oneline -5)'\"}'"
+   }]
+  }]
+ }
 }
 ```
 
 Claude bắt đầu session biết ngay branch hiện tại + recent commits.
 
-### 6. **Desktop Notification Khi Claude Xong** 🔔
+### 6. **Desktop Notification Khi Claude Xong** 
 ```json
 {
-  "hooks": {
-    "Stop": [{
-      "hooks": [{
-        "type": "command",
-        "command": "terminal-notifier -message 'Claude finished' -title 'Claude Code' -sound default"
-      }]
-    }]
-  }
+ "hooks": {
+  "Stop": [{
+   "hooks": [{
+    "type": "command",
+    "command": "terminal-notifier -message 'Claude finished' -title 'Claude Code' -sound default"
+   }]
+  }]
+ }
 }
 ```
 
@@ -162,15 +162,15 @@ Linux alternative: `notify-send "Claude finished"`
 ### 7. **Block Writes vào Protected Paths**
 ```json
 {
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "Edit|Write",
-      "hooks": [{
-        "type": "command",
-        "command": "PATH=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path'); if echo \"$PATH\" | grep -qE '(migrations/|\\.env|secrets/)'; then echo 'Blocked: protected path' >&2; exit 2; fi; exit 0"
-      }]
-    }]
-  }
+ "hooks": {
+  "PreToolUse": [{
+   "matcher": "Edit|Write",
+   "hooks": [{
+    "type": "command",
+    "command": "PATH=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path'); if echo \"$PATH\" | grep -qE '(migrations/|\\.env|secrets/)'; then echo 'Blocked: protected path' >&2; exit 2; fi; exit 0"
+   }]
+  }]
+ }
 }
 ```
 
@@ -178,49 +178,49 @@ Linux alternative: `notify-send "Claude finished"`
 Từ `ykdojo/claude-code-tips`:
 ```json
 {
-  "hooks": {
-    "Stop": [{
-      "hooks": [{
-        "type": "command",
-        "command": "~/.claude/scripts/check-context.sh"
-      }]
-    }]
-  }
+ "hooks": {
+  "Stop": [{
+   "hooks": [{
+    "type": "command",
+    "command": "~/.claude/scripts/check-context.sh"
+   }]
+  }]
+ }
 }
 ```
 
 Script check context %, suggest `/half-clone` nếu > 85%.
 
-⚠️ Requires `auto-compact` disabled (otherwise conflicts).
+️ Requires `auto-compact` disabled (otherwise conflicts).
 
 ### 9. **Pre-Commit Backup**
 ```json
 {
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "Bash",
-      "if": "Bash(git commit:*)",
-      "hooks": [{
-        "type": "command",
-        "command": "git stash push -m \"pre-claude-commit-$(date +%s)\" --keep-index || true"
-      }]
-    }]
-  }
+ "hooks": {
+  "PreToolUse": [{
+   "matcher": "Bash",
+   "if": "Bash(git commit:*)",
+   "hooks": [{
+    "type": "command",
+    "command": "git stash push -m \"pre-claude-commit-$(date +%s)\" --keep-index || true"
+   }]
+  }]
+ }
 }
 ```
 
-### 10. **Log Every Session to File** 📝
+### 10. **Log Every Session to File** 
 ```json
 {
-  "hooks": {
-    "Stop": [{
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"$(date): session completed\" >> ~/claude-work.log",
-        "async": true
-      }]
-    }]
-  }
+ "hooks": {
+  "Stop": [{
+   "hooks": [{
+    "type": "command",
+    "command": "echo \"$(date): session completed\" >> ~/claude-work.log",
+    "async": true
+   }]
+  }]
+ }
 }
 ```
 
@@ -228,62 +228,62 @@ Async = không block Claude từ stopping.
 
 ---
 
-## 🎨 Starter Pack Config (All-in-One)
+## Starter Pack Config (All-in-One)
 
 Copy vào `~/.claude/settings.json`:
 
 ```json
 {
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [{
-          "type": "command",
-          "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf /|DROP TABLE' && { echo 'Dangerous command blocked' >&2; exit 2; } || exit 0"
-        }]
-      },
-      {
-        "matcher": "Edit|Write",
-        "hooks": [{
-          "type": "command",
-          "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path'); echo \"$FILE\" | grep -qE '\\.env|secrets/' && { echo 'Protected path blocked' >&2; exit 2; } || exit 0"
-        }]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [{
-          "type": "command",
-          "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path'); case \"$FILE\" in *.ts|*.tsx|*.js|*.jsx) npx prettier --write \"$FILE\" 2>&1 ;; *.py) ruff format \"$FILE\" 2>&1 ;; esac"
-        }]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [{
-          "type": "command",
-          "command": "echo '{\"additionalContext\": \"Branch: '$(git branch --show-current 2>/dev/null)'\"}'"
-        }]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [{
-          "type": "command",
-          "command": "command -v terminal-notifier >/dev/null && terminal-notifier -message 'Claude finished' -title 'Claude Code' 2>/dev/null || true",
-          "async": true
-        }]
-      }
-    ]
-  }
+ "hooks": {
+  "PreToolUse": [
+   {
+    "matcher": "Bash",
+    "hooks": [{
+     "type": "command",
+     "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf /|DROP TABLE' && { echo 'Dangerous command blocked' >&2; exit 2; } || exit 0"
+    }]
+   },
+   {
+    "matcher": "Edit|Write",
+    "hooks": [{
+     "type": "command",
+     "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path'); echo \"$FILE\" | grep -qE '\\.env|secrets/' && { echo 'Protected path blocked' >&2; exit 2; } || exit 0"
+    }]
+   }
+  ],
+  "PostToolUse": [
+   {
+    "matcher": "Write|Edit|MultiEdit",
+    "hooks": [{
+     "type": "command",
+     "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path'); case \"$FILE\" in *.ts|*.tsx|*.js|*.jsx) npx prettier --write \"$FILE\" 2>&1 ;; *.py) ruff format \"$FILE\" 2>&1 ;; esac"
+    }]
+   }
+  ],
+  "SessionStart": [
+   {
+    "hooks": [{
+     "type": "command",
+     "command": "echo '{\"additionalContext\": \"Branch: '$(git branch --show-current 2>/dev/null)'\"}'"
+    }]
+   }
+  ],
+  "Stop": [
+   {
+    "hooks": [{
+     "type": "command",
+     "command": "command -v terminal-notifier >/dev/null && terminal-notifier -message 'Claude finished' -title 'Claude Code' 2>/dev/null || true",
+     "async": true
+    }]
+   }
+  ]
+ }
 }
 ```
 
 ---
 
-## 🚀 Advanced Patterns
+## Advanced Patterns
 
 ### Pattern 1: **PreToolUse Input Modification** (v2.0.10+)
 Hooks có thể **rewrite tool inputs** thay vì block:
@@ -295,9 +295,9 @@ COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command')
 
 # Convert relative paths to absolute
 if echo "$COMMAND" | grep -q "^cd "; then
-  # Modify and output new JSON
-  MODIFIED=$(echo "$INPUT" | jq '.tool_input.command |= sub("\\./"; "'"$PWD"'/")')
-  echo "$MODIFIED"
+ # Modify and output new JSON
+ MODIFIED=$(echo "$INPUT" | jq '.tool_input.command |= sub("\\./"; "'"$PWD"'/")')
+ echo "$MODIFIED"
 fi
 exit 0
 ```
@@ -312,16 +312,16 @@ Hooks defined trong skill frontmatter:
 name: code-reviewer
 description: Auto-lint review of code changes
 hooks:
-  PreToolUse:
-    - matcher: "Bash"
-      hooks:
-        - type: command
-          command: "./scripts/validate-command.sh"
-  PostToolUse:
-    - matcher: "Edit|Write"
-      hooks:
-        - type: command
-          command: "./scripts/run-linter.sh"
+ PreToolUse:
+  - matcher: "Bash"
+   hooks:
+    - type: command
+     command: "./scripts/validate-command.sh"
+ PostToolUse:
+  - matcher: "Edit|Write"
+   hooks:
+    - type: command
+     command: "./scripts/run-linter.sh"
 ---
 
 You are an expert code review agent...
@@ -338,12 +338,12 @@ COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command')
 
 # Only run expensive validation for specific commands
 case "$COMMAND" in
-  *"terraform apply"*|*"kubectl apply"*|*"npm publish"*)
-    ./scripts/expensive-validation.sh
-    ;;
-  *)
-    exit 0
-    ;;
+ *"terraform apply"*|*"kubectl apply"*|*"npm publish"*)
+  ./scripts/expensive-validation.sh
+  ;;
+ *)
+  exit 0
+  ;;
 esac
 ```
 
@@ -352,16 +352,16 @@ Claude yes/no evaluation cho decisions phức tạp:
 
 ```json
 {
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "Bash",
-      "hooks": [{
-        "type": "prompt",
-        "prompt": "Does this command affect production infrastructure? Answer only 'yes' or 'no'.",
-        "deny-on": "yes"
-      }]
-    }]
-  }
+ "hooks": {
+  "PreToolUse": [{
+   "matcher": "Bash",
+   "hooks": [{
+    "type": "prompt",
+    "prompt": "Does this command affect production infrastructure? Answer only 'yes' or 'no'.",
+    "deny-on": "yes"
+   }]
+  }]
+ }
 }
 ```
 
@@ -373,12 +373,12 @@ Từ `disler/claude-code-hooks-mastery`:
 
 ---
 
-## ⚠️ Common Pitfalls
+## ️ Common Pitfalls
 
 ### 1. **Wrong Exit Code** (trips up almost everyone)
-- ❌ `exit 1` = hook error (Claude thinks hook failed)
-- ✅ `exit 2` = block action
-- ✅ `exit 0` = proceed
+- `exit 1` = hook error (Claude thinks hook failed)
+- `exit 2` = block action
+- `exit 0` = proceed
 
 ### 2. **Infinite Loops**
 **Symptoms**: Claude keeps retrying, machine heats up.
@@ -390,7 +390,7 @@ Từ `disler/claude-code-hooks-mastery`:
 #!/bin/bash
 INPUT=$(cat)
 if [ "$(echo "$INPUT" | jq -r '.stop_hook_active')" = "true" ]; then
-  exit 0  # Allow stopping on subsequent invocations
+ exit 0 # Allow stopping on subsequent invocations
 fi
 # ... your logic
 ```
@@ -411,9 +411,9 @@ Checking same thing repeatedly (vd "is this protected branch?"):
 ```bash
 CACHE_FILE="/tmp/claude-branch-cache"
 if [ -f "$CACHE_FILE" ] && [ $(($(date +%s) - $(stat -f %m "$CACHE_FILE"))) -lt 60 ]; then
-  cat "$CACHE_FILE"
+ cat "$CACHE_FILE"
 else
-  git branch --show-current | tee "$CACHE_FILE"
+ git branch --show-current | tee "$CACHE_FILE"
 fi
 ```
 
@@ -429,7 +429,7 @@ trap 'echo "Hook error: $?" >&2; exit 0' ERR
 
 ---
 
-## 🔒 Security Features
+## Security Features
 
 ### PreToolUse `permissionDecision: "deny"`
 **Cực mạnh**: Block tool ngay cả trong `bypassPermissions` mode hoặc `--dangerously-skip-permissions`.
@@ -440,8 +440,8 @@ INPUT=$(cat)
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command')
 
 if echo "$COMMAND" | grep -q "production"; then
-  echo '{"permissionDecision": "deny", "reason": "Production commands require manual approval"}'
-  exit 0
+ echo '{"permissionDecision": "deny", "reason": "Production commands require manual approval"}'
+ exit 0
 fi
 exit 0
 ```
@@ -450,12 +450,12 @@ exit 0
 
 ---
 
-## 🧪 Testing Hooks
+## Testing Hooks
 
 ### Manual test
 ```bash
 echo '{"tool_name":"Bash","tool_input":{"command":"ls"}}' | ./my-hook.sh
-echo $?  # Check exit code
+echo $? # Check exit code
 ```
 
 ### Debug tips
@@ -466,12 +466,12 @@ echo $?  # Check exit code
 
 ---
 
-## 📍 Locations & Precedence
+## Locations & Precedence
 
 ```
-1. ~/.claude/settings.json              # User-global
-2. .claude/settings.json                # Project-shared (commit git)
-3. .claude/settings.local.json          # Project-personal (gitignore)
+1. ~/.claude/settings.json       # User-global
+2. .claude/settings.json        # Project-shared (commit git)
+3. .claude/settings.local.json     # Project-personal (gitignore)
 ```
 
 **Precedence**: Local > Project > User.
@@ -480,7 +480,7 @@ echo $?  # Check exit code
 
 ---
 
-## 🎯 Quick Install Order
+## Quick Install Order
 
 ### Week 1: Essential 3
 - [ ] Auto-format on edit (PostToolUse)
@@ -506,7 +506,7 @@ echo $?  # Check exit code
 
 ---
 
-## 📚 Sources
+## Sources
 - Anthropic Official: https://code.claude.com/docs/en/hooks-guide
 - **Must-read**: `disler/claude-code-hooks-mastery` - comprehensive examples: https://github.com/disler/claude-code-hooks-mastery
 - ClaudeLog: https://claudelog.com/mechanics/hooks/

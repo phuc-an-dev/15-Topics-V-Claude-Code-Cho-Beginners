@@ -1,4 +1,4 @@
-# 📚 TỔNG HỢP: 15 Topics Về Claude Code Cho Beginners
+# TỔNG HỢP: 15 Topics Về Claude Code Cho Beginners
 
 > **Nguồn**: Reddit r/ClaudeAI, r/ClaudeCode, GitHub repos (6.6k+ stars), Anthropic official docs
 > **Ngày**: April 2026
@@ -6,7 +6,7 @@
 
 ---
 
-## 🗂️ Danh Sách Files Chi Tiết
+## ️ Danh Sách Files Chi Tiết
 
 | # | File | Nội dung chính |
 |---|------|----------------|
@@ -28,7 +28,7 @@
 
 ---
 
-## 🎯 TOP 10 Key Insights (Đọc Ngay!)
+## TOP 10 Key Insights (Đọc Ngay!)
 
 ### 1. **Context is your fundamental constraint**
 > "Most best practices are based on one constraint: Claude's context window fills up fast, and performance degrades as it fills." — Anthropic
@@ -53,10 +53,10 @@ Tests, screenshots, linter, typecheck. Không verify được → don't ship.
 
 ### 6. **Specific prompts beat vague ones**
 ```
-❌ "fix the login bug"
-✅ "users report login fails after session timeout.
-    Check auth flow in src/auth/, especially token refresh.
-    Write failing test first."
+ "fix the login bug"
+ "users report login fails after session timeout.
+  Check auth flow in src/auth/, especially token refresh.
+  Write failing test first."
 ```
 
 ### 7. **Subagents = separate context windows**
@@ -77,7 +77,7 @@ Guidelines, conventions → CLAUDE.md.
 
 ---
 
-## 🚨 TOP 10 Mistakes Để Tránh
+## TOP 10 Mistakes Để Tránh
 
 | # | Mistake | Fix |
 |---|---------|-----|
@@ -94,7 +94,7 @@ Guidelines, conventions → CLAUDE.md.
 
 ---
 
-## 🛠️ Setup Essentials (Cho Beginners)
+## ️ Setup Essentials (Cho Beginners)
 
 ### Day 1 Setup (30 phút)
 ```bash
@@ -111,16 +111,16 @@ alias ch='claude --chrome'
 **Minimal `~/.claude/settings.json`**:
 ```json
 {
-  "permissions": {
-    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)"]
-  },
-  "env": {
-    "ENABLE_TOOL_SEARCH": "true"
-  },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  }
+ "permissions": {
+  "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)"]
+ },
+ "env": {
+  "ENABLE_TOOL_SEARCH": "true"
+ },
+ "attribution": {
+  "commit": "",
+  "pr": ""
+ }
 }
 ```
 
@@ -141,7 +141,7 @@ bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/sc
 
 ---
 
-## 📊 Quick Reference Tables
+## Quick Reference Tables
 
 ### Essential Slash Commands
 | Command | Purpose |
@@ -182,16 +182,16 @@ bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/sc
 
 ---
 
-## 🏆 Top GitHub Repos (Bookmark)
+## Top GitHub Repos (Bookmark)
 
 ### Essential
-- **[ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips)** (6.6k ⭐) - 45 tips cực hay
-- **[anthropics/skills](https://github.com/anthropics/skills)** (37.5k ⭐) - Official skills
-- **[anthropics/claude-code](https://github.com/anthropics/claude-code)** (55k ⭐) - Main repo
+- **[ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips)** (6.6k ) - 45 tips cực hay
+- **[anthropics/skills](https://github.com/anthropics/skills)** (37.5k ) - Official skills
+- **[anthropics/claude-code](https://github.com/anthropics/claude-code)** (55k ) - Main repo
 
 ### Skills Collections
 - **[obra/superpowers](https://github.com/obra/superpowers)** - Core dev skills
-- **[Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills)** (1.5k ⭐) - 66 full-stack skills
+- **[Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills)** (1.5k ) - 66 full-stack skills
 - **[karanb192/awesome-claude-skills](https://github.com/karanb192/awesome-claude-skills)** - 50+ verified
 - **[VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills)** - 1000+ skills
 - **[travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills)** - Curated w/ analysis
@@ -213,7 +213,7 @@ bash <(curl -s https://raw.githubusercontent.com/ykdojo/claude-code-tips/main/sc
 
 ---
 
-## 🧠 Mindset Shifts Cho Beginners
+## Mindset Shifts Cho Beginners
 
 ### Từ "Chatbot" → "Collaborator"
 Claude Code không phải chatbot trả lời câu hỏi. Là **collaborator** bạn architect:
@@ -244,7 +244,7 @@ Claude Code không phải chatbot trả lời câu hỏi. Là **collaborator** b
 
 ---
 
-## 🚀 Learning Path Cho Beginners
+## Learning Path Cho Beginners
 
 ### Week 1: Basics
 - [ ] Install Claude Code + gh CLI
@@ -283,7 +283,7 @@ Claude Code không phải chatbot trả lời câu hỏi. Là **collaborator** b
 
 ---
 
-## 🔗 External Resources
+## External Resources
 
 ### Official
 - **Docs**: https://code.claude.com/docs/en/overview
@@ -305,7 +305,7 @@ Claude Code không phải chatbot trả lời câu hỏi. Là **collaborator** b
 
 ---
 
-## 💎 Final Wisdom
+## Final Wisdom
 
 ### Top 3 Principles từ Research
 
@@ -329,7 +329,7 @@ Cách tốt nhất học Claude = dùng Claude nhiều. Consume tokens, build in
 
 ---
 
-## 📝 Notes Riêng Cho Bạn (Vietnamese Developer)
+## Notes Riêng Cho Bạn (Vietnamese Developer)
 
 Dựa trên context bạn dùng Claude Code CLI + VS Code/Antigravity extension:
 
@@ -361,6 +361,6 @@ Dựa trên context bạn dùng Claude Code CLI + VS Code/Antigravity extension:
 
 ---
 
-**Good luck on your Claude Code journey! 🚀**
+**Good luck on your Claude Code journey! **
 
 *Bộ research này được tạo bằng Claude Opus 4.7 qua web search trên Reddit, GitHub, và Anthropic official docs ngày 18/04/2026.*

@@ -4,11 +4,11 @@
 
 ---
 
-## 🎯 Starter Pack cho Spring Boot Developer
+## Starter Pack cho Spring Boot Developer
 
 ### Must-Have (Top 5)
 
-#### 1. **piomin/claude-ai-spring-boot** ⭐⭐⭐⭐⭐
+#### 1. **piomin/claude-ai-spring-boot** 
 **Repo**: https://github.com/piomin/claude-ai-spring-boot
 
 **Template hoàn chỉnh cho Spring Boot project** - clone & dùng ngay.
@@ -16,29 +16,29 @@
 **Cấu trúc (pre-built `.claude/`):**
 ```
 .claude/
-├── agents/                      # 8 specialized subagents
-│   ├── code-reviewer.md
-│   ├── devops-engineer.md
-│   ├── docker-expert.md
-│   ├── java-architect.md
-│   ├── kubernetes-specialist.md
-│   ├── security-engineer.md
-│   ├── spring-boot-engineer.md
-│   └── test-automator.md
-└── skills/
-    ├── api-contract-review/
-    ├── clean-code/
-    ├── design-patterns/
-    ├── java-architect/         # với references/jpa-optimization, spring-security, ...
-    ├── java-code-review/
-    ├── jpa-patterns/
-    ├── logging-patterns/
-    └── spring-boot-engineer/
+ agents/           # 8 specialized subagents
+  code-reviewer.md
+  devops-engineer.md
+  docker-expert.md
+  java-architect.md
+  kubernetes-specialist.md
+  security-engineer.md
+  spring-boot-engineer.md
+  test-automator.md
+ skills/
+   api-contract-review/
+   clean-code/
+   design-patterns/
+   java-architect/     # với references/jpa-optimization, spring-security, ...
+   java-code-review/
+   jpa-patterns/
+   logging-patterns/
+   spring-boot-engineer/
 ```
 
 Author **Piotr Mińkowski** - tác giả sách "Hands-On Java with Kubernetes".
 
-#### 2. **a-pavithraa/springboot-skills-marketplace** 🔥
+#### 2. **a-pavithraa/springboot-skills-marketplace** 
 **Repo**: https://github.com/a-pavithraa/springboot-skills-marketplace
 
 **Architecture-first approach**: Hỏi vài câu về project, sau đó build đúng architecture.
@@ -115,7 +115,7 @@ Modular plugin marketplace:
 
 ---
 
-## 🏗️ Specialized Skills theo Needs
+## ️ Specialized Skills theo Needs
 
 ### For Microservices
 - **Microservices Architect** (Jeffallan)
@@ -153,7 +153,7 @@ Modular plugin marketplace:
 
 ---
 
-## 📋 CLAUDE.md Template Cho Spring Boot Project
+## CLAUDE.md Template Cho Spring Boot Project
 
 ```markdown
 # Project: [Tên]
@@ -207,7 +207,7 @@ Modular plugin marketplace:
 
 ---
 
-## 🔧 Workflow Examples
+## Workflow Examples
 
 ### Example 1: Create CRUD Service
 ```
@@ -251,7 +251,7 @@ Modular plugin marketplace:
 
 ---
 
-## 🎯 Subagent Strategy
+## Subagent Strategy
 
 ### Combos hiệu quả từ Jeffallan guide:
 | Task | Subagents combo |
@@ -273,43 +273,43 @@ Modular plugin marketplace:
 
 ---
 
-## 🚫 Common Anti-Patterns (Skills Giúp Tránh)
+## Common Anti-Patterns (Skills Giúp Tránh)
 
 ### 1. **Repository per Entity Hell**
-❌ Tạo `UserRepository`, `OrderRepository`, `ProductRepository`... cho mọi entity
-✅ Shared generic patterns, CQRS query services
+ Tạo `UserRepository`, `OrderRepository`, `ProductRepository`... cho mọi entity
+ Shared generic patterns, CQRS query services
 
 ### 2. **Method-name Query Hell**
-❌ `findByFirstNameAndLastNameAndEmailAndActiveAndCreatedDateBetween...`
-✅ Custom `@Query` với clear name
+ `findByFirstNameAndLastNameAndEmailAndActiveAndCreatedDateBetween...`
+ Custom `@Query` với clear name
 
 ### 3. **Blind `save()` Calls**
-❌ Call `repository.save()` mà không understand dirty checking
-✅ Understand JPA persistence context, use `saveAndFlush()` khi cần
+ Call `repository.save()` mà không understand dirty checking
+ Understand JPA persistence context, use `saveAndFlush()` khi cần
 
 ### 4. **N+1 Queries**
-❌ `@OneToMany` lazy load trong loops
-✅ `@EntityGraph` or DTO projections, explicit `JOIN FETCH`
+ `@OneToMany` lazy load trong loops
+ `@EntityGraph` or DTO projections, explicit `JOIN FETCH`
 
 ### 5. **Entity Leaks qua API**
-❌ Return `User` entity trực tiếp từ controller
-✅ DTO mapping, never expose entities
+ Return `User` entity trực tiếp từ controller
+ DTO mapping, never expose entities
 
 ### 6. **Field Injection**
-❌ `@Autowired private UserService userService;`
-✅ Constructor injection (Lombok `@RequiredArgsConstructor`)
+ `@Autowired private UserService userService;`
+ Constructor injection (Lombok `@RequiredArgsConstructor`)
 
 ### 7. **Business Logic trong Controller**
-❌ Controllers làm CRUD + business rules + validation
-✅ Thin controllers, fat services
+ Controllers làm CRUD + business rules + validation
+ Thin controllers, fat services
 
 ### 8. **Missing Pagination**
-❌ `GET /api/users` returns all 1M users
-✅ `Pageable` parameter mandatory cho list endpoints
+ `GET /api/users` returns all 1M users
+ `Pageable` parameter mandatory cho list endpoints
 
 ---
 
-## 📦 Quick Install Order
+## Quick Install Order
 
 ### Tuần 1 - Foundations
 1. Clone `piomin/claude-ai-spring-boot` làm template base
@@ -330,7 +330,7 @@ Modular plugin marketplace:
 
 ---
 
-## 📚 Key Repos Summary
+## Key Repos Summary
 
 | Repo | Focus |
 |------|-------|
@@ -341,6 +341,6 @@ Modular plugin marketplace:
 | [giuseppe-trisciuoglio/developer-kit](https://github.com/giuseppe-trisciuoglio/developer-kit) | Modular plugin kit |
 | [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | 100+ subagents incl. spring-boot-engineer |
 
-## 📝 Blog Resources
+## Blog Resources
 - Piotr's TechBlog: https://piotrminkowski.com/2026/03/24/claude-code-template-for-spring-boot/
 - Jeffallan Skills Guide: https://jeffallan.github.io/claude-skills/
